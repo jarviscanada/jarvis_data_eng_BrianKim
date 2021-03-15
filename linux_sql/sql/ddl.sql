@@ -1,5 +1,8 @@
+-- Change the user to 'host_agent' database, if not connected.
 \c host_agent;
 
+-- Create a table to store hardware specification, if not created
+-- PK is id
 CREATE TABLE IF NOT EXISTS PUBLIC.host_info
     (
         id                  SERIAL NOT NULL PRIMARY KEY,
@@ -13,6 +16,8 @@ CREATE TABLE IF NOT EXISTS PUBLIC.host_info
         timestamp           TIMESTAMP NOT NULL
     );
 
+-- Create a table to store resource usage data, if not created
+-- PK is timestamp. FK is host_id which refereces the host_info table
 CREATE TABLE IF NOT EXISTS PUBLIC.host_usage
     (
         timestamp           TIMESTAMP NOT NULL PRIMARY KEY,
