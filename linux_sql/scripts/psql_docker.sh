@@ -4,16 +4,17 @@
 sudo systemctl status docker || systemctl start docker
 
 # Get the line count of all containers currently and store it in a variable
-lines=$(docker ps -a -f name=jrvs-psql | wc -l)
+container_status=$(docker ps -a -f name=jrvs-psql | wc -l)
+pg_usage=$1
 
 # Handle the first argument accordingly using case statements
-case $1 in
+case pg_usage in
   # When first argument is "create" handle it.
   "create")
-    # If lines is 2 then container is already created. Exit.
-    if [ $lines -eq 2 ]; then
+    # If container_status is 2 then container is already created. Exit.
+    if [ $container_status -eq 2 ]; then
       echo "Error: The container 'jrvs-psql' is already created."
-      exit 1
+      exit 0
     fi
 
     # If number of following arguments are wrong, then arguments are not fully provided. Exit.
@@ -37,12 +38,12 @@ case $1 in
   # If first argument is "start" or "stop", handle it here
   "start" | "stop")
     # If line count is not 2, then container instance was not created. Exit
-    if [ $lines -ne 2 ]; then
+    if [ $container_status -ne 2 ]; then
       echo "Error: The container 'jrvs-psql' is not created"
       exit 1
     fi
 
-    case $1 in
+    case pg_usage in
     "start")
       # If first argument == "start", then start the container
       docker container start jrvs-psql
