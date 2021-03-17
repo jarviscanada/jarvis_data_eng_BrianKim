@@ -8,7 +8,7 @@ container_status=$(docker ps -a -f name=jrvs-psql | wc -l)
 pg_usage=$1
 
 # Handle the first argument accordingly using case statements
-case pg_usage in
+case $pg_usage in
   # When first argument is "create" handle it.
   "create")
     # If container_status is 2 then container is already created. Exit.
@@ -43,7 +43,7 @@ case pg_usage in
       exit 1
     fi
 
-    case pg_usage in
+    case $pg_usage in
     "start")
       # If first argument == "start", then start the container
       docker container start jrvs-psql
