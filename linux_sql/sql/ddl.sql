@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS PUBLIC.host_info
         cpu_architecture    VARCHAR NOT NULL,
         cpu_model           VARCHAR NOT NULL,
         cpu_mhz             FLOAT NOT NULL,
-        L2_cache            INT NOT NULL,
+        L2_cache            VARCHAR NOT NULL,
         total_mem           INT NOT NULL,
         timestamp           TIMESTAMP NOT NULL
     );
@@ -25,6 +25,6 @@ CREATE TABLE IF NOT EXISTS PUBLIC.host_usage
         memory_free         INT NOT NULL,
         cpu_idle            INT NOT NULL,
         cpu_kernel          INT NOT NULL,
-        disk_id             INT NOT NULL,
-        disk_available      INT NOT NULL
+        disk_io             INT NOT NULL,
+        disk_available      VARCHAR NOT NULL
     );
