@@ -68,4 +68,4 @@ from
       ts
   ) t
 where
-  t.num_data_points < 3; 
+  t.num_data_points < 3;
