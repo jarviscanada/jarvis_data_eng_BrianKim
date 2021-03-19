@@ -44,17 +44,45 @@ Use markdown code block for your quick start commands
 ![my image](./assets/linux_sql_architecture.png)
 
 ## Scripts
-Shell script descirption and usage (use markdown code block for script usage)
 - psql_docker.sh
+    - This script takes `create | start | stop [username] [password]` arguments where each argument will create, start, or stop a PostgreSQL instance by using docker.
+    - If the argument is `create` user must provide username and password as argument as well. If not it will exit with an error.
 - host_info.sh
+    - This script will parse hardware specification info into a INSERT statement and execute it to insert it inside the `host_info` table. 
 - host_usage.sh
+    - This script will parse CPU/Memory node resource usage into a INSERT statement and execute it to insert it inside the `host_usage` table.
 - crontab
-- queries.sql (describe what business problem you are trying to resolve)
+    - In order to consistently grab resource usage data from each node, add a job that runs `host_usage.sh` every 1 minute.
+- queries.sql
+    - These are some useful queries to use to solve some business problems
+1. Group hosts by number of CPUs and Total Memory size in descending order
+2. Get the average memory usage percentage in 5 minute interval for each hosts
+3. Detect host/server failure by listing the specific 5 minute interval where the data entries are less than 3 (Consider this to be a failture)
 
 ## Database Modeling
-Describe the schema of each table using markdown table syntax (do not put any sql code)
-- `host_info`
-- `host_usage`
+`host_info` Table
+| Columns | Values  |
+| ------- | ------- |
+| id | SERIAL NOT NULL PRIMARY KEY |
+| hostname | VARCHAR NOT NULL UNIQUE |
+| cpu_number | INT NOT NULL |
+| cpu_architecture | VARCHAR NOT NULL |
+| cpu_model | VARCHAR NOT NULL |
+| cpu_mhz | FLOAT NOT NULL |
+| L2_cache | VARCHAR NOT NULL |
+| total_mem | INT NOT NULL |
+| timestamp | TIMESTAMP NOT NULL |
+
+`host_usage` Table
+| Columns | Values  |
+| ------- | ------- |
+| timestamp | TIMESTAMP NOT NULL PRIMARY KEY |
+| host_id | INT NOT NULL REFERENCES `host_info(id)` |
+| memory_free | INT NOT NULL |
+| cpu_idle | INT NOT NULL |
+| cpu_kernel | INT NOT NULL |
+| disk_io | INT NOT NULL |
+| disk_available | VARCHAR NOT NULL |
 
 # Test
 How did you test your bash scripts and SQL queries? What was the result?
