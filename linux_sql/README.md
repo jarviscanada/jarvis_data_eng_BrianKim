@@ -1,7 +1,7 @@
 # Linux Cluster Monitoring Agent
 
 # Introduction
-This project implements automating monitoring agent which observes a cluster of Linux nodes/servers and record data from the nodes. The users are clusters of Linux servers internally connected by a switch which communicates through internal IPv4 addresses. This monitoring agent will capture the hardware specifications of each nodes and periodically insert node resource usuage into a RDBMS database. Using this monitoring agent and data it collects, you can solve important business problems involving resource planning such as increasing and decreasing number of nodes depending on the servers' relative CPU/Memory usages.<br/>
+This project implements an automating monitor agent which observes a cluster of Linux nodes/servers and record data from the nodes. The users are clusters of Linux servers internally connected by a switch which communicates through internal IPv4 addresses. This monitoring agent will capture the hardware specifications of each nodes and periodically insert node resource usuage into a RDBMS database. Using this monitoring agent and data it collects, you can solve important business problems involving resource planning such as increasing and decreasing the number of nodes depending on the servers' relative CPU/Memory usages.<br/>
 Technologies used: <br/>
 * Linux 
 * GitFlow
@@ -91,8 +91,7 @@ Since this is only a Minimum Viable Product in the early stage of development, i
 - For `queries.sql`, test was done by first inserting some test data into the database and running the queries and comparing it the expected result and the actual result.
 
 # Improvements
-Write at least three things you want to improve 
-e.g. 
-- handle hardware update 
-- blah
-- blah
+- Handle exit cases more efficiently.
+    - ex) Instead of exiting when there is no container, create the container and run it.
+- Check for psql version and handle update without compromising data.
+- Give host failture 'levels' so that the developers understand the severity of the server failure issue.
