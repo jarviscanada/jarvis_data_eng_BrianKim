@@ -52,7 +52,7 @@ public interface LambdaStreamExc {
    * @param <E>
    * @return
    */
-  <E> List<E> toList(IntStream intStream);
+  List<Integer> toList(IntStream intStream);
 
   /**
    * Create a IntStream range from start to end inclusive
