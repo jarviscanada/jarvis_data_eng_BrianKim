@@ -1,7 +1,6 @@
 package ca.jrvs.apps.grep;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,6 +15,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.log4j.BasicConfigurator;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JavaGrepImp implements JavaGrep {
 
@@ -60,6 +62,7 @@ public class JavaGrepImp implements JavaGrep {
     List<File> fileList = new ArrayList<>();
     File root = new File(rootDir);
     listFilesHelper(root, fileList);
+
     return fileList;
   }
 
