@@ -9,7 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +19,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JavaGrepImp implements JavaGrep {
-
   final static Logger logger = LoggerFactory.getLogger(JavaGrep.class);
   private String regex, rootPath, outFile;
 
@@ -87,7 +85,7 @@ public class JavaGrepImp implements JavaGrep {
       lineList = reader.lines().collect(Collectors.toList());
       reader.close();
     } catch (Exception e) {
-      e.printStackTrace();
+      JavaGrepImp.logger.error(e.getLocalizedMessage(), e);
     }
     return lineList;
   }
