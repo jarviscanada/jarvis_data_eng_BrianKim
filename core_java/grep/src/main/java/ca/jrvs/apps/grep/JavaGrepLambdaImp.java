@@ -24,7 +24,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     try {
       javaGrepImp.process();
     } catch (IOException e) {
-      JavaGrepLambdaImp.logger.error(e.getLocalizedMessage(), e);
+      javaGrepImp.logger.error("Error: I/O Exception", e);
     }
   }
 
@@ -60,7 +60,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
       lineList = reader.lines().collect(Collectors.toList());
       reader.close();
     } catch (Exception e) {
-      JavaGrepLambdaImp.logger.error(e.getLocalizedMessage(), e);
+      logger.error("Error: I/O Exception", e);
     }
     return lineList;
   }
