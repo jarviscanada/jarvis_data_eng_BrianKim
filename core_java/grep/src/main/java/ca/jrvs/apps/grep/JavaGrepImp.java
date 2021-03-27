@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class JavaGrepImp implements JavaGrep {
-  final static Logger logger = LoggerFactory.getLogger(JavaGrep.class);
+  final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
   private String regex, rootPath, outFile;
 
   public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class JavaGrepImp implements JavaGrep {
     try {
       javaGrepImp.process();
     } catch (Exception e) {
-      JavaGrepImp.logger.error(e.getLocalizedMessage(), e);
+      javaGrepImp.logger.error("Error: I/O Exception", e);
     }
   }
 
@@ -48,6 +48,7 @@ public class JavaGrepImp implements JavaGrep {
           matchedLines.add(line);
       }
     }
+
     try {
       writeToFile(matchedLines);
     } catch (IOException e) {
@@ -85,7 +86,7 @@ public class JavaGrepImp implements JavaGrep {
       lineList = reader.lines().collect(Collectors.toList());
       reader.close();
     } catch (Exception e) {
-      JavaGrepImp.logger.error(e.getLocalizedMessage(), e);
+      logger.error("Error: I/O Exception.", e);
     }
     return lineList;
   }
