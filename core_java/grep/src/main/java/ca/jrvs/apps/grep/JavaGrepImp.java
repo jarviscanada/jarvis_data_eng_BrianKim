@@ -48,16 +48,8 @@ public class JavaGrepImp implements JavaGrep {
           matchedLines.add(line);
       }
     }
-<<<<<<< HEAD
 
-    try {
-      writeToFile(matchedLines);
-    } catch (IOException e) {
-      throw e;
-    }
-=======
     writeToFile(matchedLines);
->>>>>>> feature/javagrep_readme
   }
 
   @Override

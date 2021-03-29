@@ -1,28 +1,4 @@
 # Introduction
-<<<<<<< HEAD
-(50-100 words)
-Discuss the design of each app. What does the app do? What technologies have you used? (e.g. core java, libraries, lambda, IDE, docker, etc..)
-
-# Quick Start
-How to use your apps? 
-
-#Implementation
-## Pseudocode
-write `process` method pseudocode.
-
-## Performance Issue
-(30-60 words)
-Discuss the memory issue and how would you fix it
-
-# Test
-How did you test your application manually? (e.g. prepare sample data, run some test cases manually, compare result)
-
-# Deployment
-How you dockerize your app for easier distribution?
-
-# Improvement
-List three things you can improve in this project.
-=======
 
 Java Grep App is a program which implements the Linux `grep` string pattern searching utility that matches a regular expression. 
 This app recursively searches a given directory for plain-text data sets for lines that match the given regular expression. When the matched lines are found, they are written out to a file. <br/>
@@ -69,4 +45,3 @@ Grep app is dockerized to a docker image and pushed to the Docker Hub, so that i
 1. Improve list/read/match operations' runtime with a more efficient data structures.
 2. Avoid run time exceptions such as `NullPointerException` with null-checking.
 3. Remove redundant try/catch blocks inside the methods where exceptions are automatically thrown with `throws`
->>>>>>> feature/javagrep_readme
