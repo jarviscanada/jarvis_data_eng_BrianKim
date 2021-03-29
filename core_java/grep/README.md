@@ -20,7 +20,7 @@ For debugging uses, the `slf4j` Logger framework is used to display error, messa
 
 ## Pseudocode
 `process` method
-```
+```Java
 matchedLines = []
 for file in listFilesRecursively(rootDir)
     for line in readFile(file)
