@@ -48,11 +48,7 @@ public class JavaGrepImp implements JavaGrep {
           matchedLines.add(line);
       }
     }
-    try {
-      writeToFile(matchedLines);
-    } catch (IOException e) {
-      throw e;
-    }
+    writeToFile(matchedLines);
   }
 
   @Override
@@ -102,13 +98,9 @@ public class JavaGrepImp implements JavaGrep {
     FileWriter file = new FileWriter(this.outFile);
     BufferedWriter writer = new BufferedWriter(file);
 
-    try {
-      for (String line : lines)
-        writer.write(line+"\n");
-      writer.close();
-    } catch (IOException e) {
-      throw e;
-    }
+    for (String line : lines)
+      writer.write(line+"\n");
+    writer.close();
   }
 
   @Override
