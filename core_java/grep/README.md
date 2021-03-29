@@ -30,7 +30,7 @@ writeToFile(matchedLines)
 ```
 
 ## Performance Issue
-While listing files and reading each files line by line, memory issue can arise when there are huge size of files in the target directory or the file is too big too efficiently search for the regex pattern. <br/>
+While listing files and reading each files line by line, memory issue can arise when there are huge size of files in the target directory or the file is too big to efficiently search for the regex pattern. <br/>
 For this issue to be avoided, the Stream API is used to for large iterations more efficiently than for-loops.
 
 # Test
