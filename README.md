@@ -19,8 +19,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_BrianKim](
 
 **Core Java Apps** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_BrianKim/tree/master/core_java)]:
       
-  - Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.
-  - JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.
+  - Twitter App: In progress.
+  - JDBC App: In progress.
   - Grep App: Developed a Java Grep App on IntelliJ that implements the Linux grep string pattern searching utility that matches a regular expression. This app recursively searches a given directory using BufferedReader for lines that match the specified regular expression. When the matched lines are found with Pattern Matcher, they are written out to a file by a BufferedWritter. Exceptions and errors are handled by SLF4J framework, packaged with Maven, and containerized with Docker for easy access.
 
 **Springboot App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng_BrianKim/tree/master/springboot)]: Not Started
