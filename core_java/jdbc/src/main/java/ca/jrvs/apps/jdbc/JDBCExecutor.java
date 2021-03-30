@@ -18,7 +18,7 @@ public class JDBCExecutor {
       Connection connection = dcm.getConnection();
       OrderDAO orderDao = new OrderDAO(connection);
       Order order = orderDao.findById(1000);
-      System.out.println(order);
+      logger.info(order.toString());
     } catch (SQLException e) {
       logger.error("SQLException: "+e.getLocalizedMessage(), e);
     }
