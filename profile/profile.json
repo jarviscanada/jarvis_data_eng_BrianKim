@@ -4,7 +4,7 @@
       "awards_achievements": [
         "Member of Dean's Honour Roll (2017)"
       ],
-      "degree": "Bachelor of Arts. Computer Science.",
+      "degree": "Bachelor of Arts, Computer Science",
       "department": "Lassonde School of Engineering",
       "duration": "2013-2020",
       "school_name": "York University"
@@ -13,7 +13,7 @@
   "github_repo_root_url": "https://github.com/jarviscanada/jarvis_data_eng_BrianKim",
   "highlighted_projects": [
     {
-      "description": "Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch and to move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look.",
+      "description": "Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch, and move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look.",
       "git_url": "https://github.com/kimbrian94/Remindoo",
       "name": "Remindoo (Play Store App)"
     }
@@ -75,7 +75,8 @@
     },
     {
       "bullets": [
-        " "
+        "Guitar",
+        "Rock Climbing"
       ],
       "title": "Activities/Hobbies"
     }

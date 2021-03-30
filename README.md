@@ -35,7 +35,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_BrianKim](
 
 
 ## Highlighted Projects
-**Remindoo (Play Store App)** [[GitHub](https://github.com/kimbrian94/Remindoo)]: Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch and to move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look.
+**Remindoo (Play Store App)** [[GitHub](https://github.com/kimbrian94/Remindoo)]: Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch, and move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look.
 
 
 ## Professional Experiences
@@ -44,11 +44,12 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng_BrianKim](
 
 
 ## Education
-**York University (2013-2020)**, Bachelor of Arts. Computer Science., Lassonde School of Engineering
+**York University (2013-2020)**, Bachelor of Arts, Computer Science, Lassonde School of Engineering
 - Member of Dean's Honour Roll (2017)
 
 
 ## Miscellaneous
 -  
 -  
--  
+- Guitar
+- Rock Climbing

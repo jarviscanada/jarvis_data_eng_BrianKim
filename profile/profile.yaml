@@ -70,7 +70,7 @@ highlighted_projects:
     #URL is optional
     git_url: "https://github.com/kimbrian94/Remindoo"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: "Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch and to move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look."
+    description: "Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch, and move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look."
 
 #List of professional experience
 #The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
@@ -87,7 +87,7 @@ professional_experience:
 education: 
   - school_name: "York University"
     duration: "2013-2020"
-    degree: "Bachelor of Arts. Computer Science."
+    degree: "Bachelor of Arts, Computer Science"
     department: "Lassonde School of Engineering"
     # optional
     awards_achievements: 
@@ -105,4 +105,5 @@ others:
       - " "
   - title: "Activities/Hobbies"
     bullets:
-      - " "
+      - "Guitar"
+      - "Rock Climbing"
