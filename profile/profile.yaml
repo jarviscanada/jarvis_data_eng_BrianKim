@@ -1,0 +1,109 @@
+# Preferred name (Characters only)
+name: "Brian Kim"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_BrianKim
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+summary: Some words that could describe me are 'persistent', 'critical thinking' and 'teamwork'. I'm a proficient Java developer and have developed Java/Kotlin applications that utilize SQL Database and Web Services following the software development lifecycle. I am a recent graduate from York University with a Bachelor of Computer Science. Not only I graduated with a deep understanding of CS fundamentals and programming skills, but I was also involved and acted as a staff of a student club called 'Youth With A Mission' which strengthened my ability to work in a team setting. Furthermore, I enhanced my coding skills and critical thinking through different programming contests and hackathons. I have a  great passion for immersing deep into the software industry because it is so ever-changing. Learning new technologies and applying them excites me as a software developer because it solidifies my skillset and helps me grow along with the industry without falling behind.
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills
+  proficient:
+    - Java
+    - Linux/Bash
+    - RDBMS/SQL
+    - Agile/Scrum
+    - Git/GitHub/GitFlow
+    - Docker
+  # At least 5 skills
+  competent:
+    - HTML/CSS/PHP
+    - Python
+    - Swift
+    - Kotlin
+    - JavaScript
+  # At least 5 skills
+  familiar:
+    - Firebase
+    - Model-View-ViewController
+    - C
+    - Objective-C
+    - Visual Basic
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Cluster Monitor"
+    git_url: "/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: Implemented an automating monitor agent which observes a cluster of Linux nodes/servers and records data from the nodes. The users are clusters of Linux servers internally connected by a switch that communicates through internal IPv4 addresses. This monitoring agent will capture the hardware specifications of each node through bash scripts and periodically insert node resource usage into a PostgreSQL RDBMS database that is containerized and ran in docker. Applying this monitoring agent and the data it collects, you can effectively solve important business problems involving resource planning such as increasing and decreasing the number of nodes depending on the servers' relative CPU/Memory usages. GitFlow is used as the branching model.
+  - name: "Core Java Apps"
+    git_url: "/core_java"
+    description:
+      - "Twitter App: In progress."
+      - "JDBC App: In progress."
+      - "Grep App: Developed a Java Grep App on IntelliJ that implements the Linux grep string pattern searching utility that matches a regular expression. This app recursively searches a given directory using BufferedReader for lines that match the specified regular expression. When the matched lines are found with Pattern Matcher, they are written out to a file by a BufferedWritter. Exceptions and errors are handled by SLF4J framework, packaged with Maven, and containerized with Docker for easy access."
+
+  - name: "Springboot App"
+    git_url: "/springboot"
+    description: ""
+  - name: "Python Data Analytics"
+    git_url: "/python_data_anlytics"
+    description: ""
+  - name: "Hadoop"
+    git_url: "/hadoop"
+    description: ""
+  - name: "Spark"
+    git_url: "/spark"
+    description: ""
+  - name: "Cloud/DevOps"
+    git_url: "/cloud_devops"
+    description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "Remindoo (Play Store App)"
+    #URL is optional
+    git_url: "https://github.com/kimbrian94/Remindoo"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Built and published an Android app in Kotlin that reminds people who work/study from home to drink water, stretch, and move around to build healthier work/study habits during COVID-19. Utilized Android Services (AlarmManager) to implement background running timer and send Broadcasts to BroadcastReceivers that handle timer expire events. Utilized NotificationManger and NotificationBuilder to send custom Notifications to users upon termination, using PendingIntent to navigate users back into the app. Utilized ViewBinding and PreferenceManager to modify and persist user preferences in the app. Implemented third-party libraries such as CircularMaterialProgressBar for a modern UI look."
+
+#List of professional experience
+#The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Software Developer"
+    company: "Jarvis"
+    duration: "2021-present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Designed, developed, and tested many applications while following the Software Development Life Cycle. Communicated in a team through Agile practices such as Daily Scrum, Sprint Retro, and Sprint Planning. Maintained source code version control through Git/GitHub, using GitFlow as a branching model. "
+
+#List of edcuation
+education: 
+  - school_name: "York University"
+    duration: "2013-2020"
+    degree: "Bachelor of Arts, Computer Science"
+    department: "Lassonde School of Engineering"
+    # optional
+    awards_achievements: 
+      - "Member of Dean's Honour Roll (2017)"
+
+#Optional section
+others:
+    #category
+  - title: "Certificates"
+    #list of items
+    bullets:
+      - " "
+  - title: "Awards"
+    bullets:
+      - " "
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Guitar"
+      - "Rock Climbing"
