@@ -13,7 +13,7 @@ public class JDBCExecutor {
 
   public static void main(String[] args) {
     BasicConfigurator.configure();
-    DatabaseConnectionManager dcm = new DatabaseConnectionManager("localhost", "hplussport", "briankim", "7596kim");
+    DatabaseConnectionManager dcm = new DatabaseConnectionManager("localhost", "hplussport", "postgres", "password");
     try {
       Connection connection = dcm.getConnection();
       OrderDAO orderDao = new OrderDAO(connection);
