@@ -1,8 +1,8 @@
 # Introduction
 This is a JDBC App that allows the Java program to create a connection to an RDBMS which stores sales information.
 It utilizes the connection pooling to simplify JDBC flow and Data Access Object (DAO) Pattern to abstract the data persistence and the underlying queries.
-CustomerDAO and OrdersDAO are implemented to perform CRUD operations against the tables in the database system.<br>
-Technologies used: Java, JDBC, PostgreSQL, Maven, slf4j Logger, DBeaver, Intellij
+CustomerDAO and OrdersDAO are implemented to perform CRUD operations against the tables in the database system.<br><br>
+**Technologies used:** Java, JDBC, PostgreSQL, Maven, slf4j Logger, DBeaver, Intellij
 
 # Implementation
 ## ER Diagram
@@ -20,5 +20,5 @@ DAO effectively encapsulates complex joins, pass, and aggregations. As an abstra
   accessing a single table is easier than the whole database. Because of this, in distributed database systems, this pattern is helpful as your store and manage shards of database horizontally. 
 
 # Test
-How you test your app against the database? (e.g. database setup, test data set up, query result)
-The database is set up in a dockerized PostgreSQL instance. Inside the `JDBCExecutor` which is the class acting as the client, manual tests were done inside the `main` method. 
+The database was set up in a dockerized PostgreSQL instance. Inside the `JDBCExecutor` which is the class acting as the client, manual tests were done inside the `main` method.
+Exceptions were logged and handled using the `slf4j` logger. Using CustomerDAO and OrdersDAO, DTO were returned and their outputs were displayed to compare results.
