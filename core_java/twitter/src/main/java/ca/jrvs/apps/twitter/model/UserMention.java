@@ -17,7 +17,7 @@ public class UserMention {
   private Long id;
   @JsonProperty("id_str")
   private String idStr;
-  private Integer[] indices = null;
+  private int[] indices = null;
   private String name;
   @JsonProperty("screen_name")
   private String screenName;
@@ -38,11 +38,11 @@ public class UserMention {
     this.idStr = idStr;
   }
 
-  public Integer[] getIndices() {
+  public int[] getIndices() {
     return indices;
   }
 
-  public void setIndices(Integer[] indices) {
+  public void setIndices(int[] indices) {
     this.indices = indices;
   }
 

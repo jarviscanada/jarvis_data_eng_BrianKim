@@ -36,7 +36,7 @@ public class TwitterHttpHelper implements HttpHelper {
 
     HttpResponse postResponse = helper.httpPost(URI.create(postUri));
     HttpResponse showResponse = helper.httpGet(URI.create(showUri));
-    HttpResponse deleteResponse = helper.httpGet(URI.create(showUri));
+    HttpResponse deleteResponse = helper.httpPost(URI.create(showUri));
     System.out.println(EntityUtils.toString(deleteResponse.getEntity()));
   }
 

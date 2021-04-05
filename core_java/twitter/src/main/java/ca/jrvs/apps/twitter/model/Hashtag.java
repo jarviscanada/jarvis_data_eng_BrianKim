@@ -10,14 +10,14 @@ import java.util.List;
     "text"
 })
 public class Hashtag {
-  private Integer[] indices = null;
+  private int[] indices = null;
   private String text;
 
-  public Integer[] getIndices() {
+  public int[] getIndices() {
     return indices;
   }
 
-  public void setIndices(Integer[] indices) {
+  public void setIndices(int[] indices) {
     this.indices = indices;
   }
 
