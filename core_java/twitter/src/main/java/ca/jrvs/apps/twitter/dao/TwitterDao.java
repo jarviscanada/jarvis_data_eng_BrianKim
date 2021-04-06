@@ -6,7 +6,6 @@ import ca.jrvs.apps.twitter.model.Tweet;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
-import javax.print.attribute.standard.PresentationDirection;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
     if (entity.getCoordinates() != null) {
       String longitude = entity.getCoordinates().getCoordinates()[0].toString();
       String latitude = entity.getCoordinates().getCoordinates()[1].toString();
-      uri = URI.create(uri.toString()+QUERY_SYM+"long"+EQUAL+longitude +QUERY_SYM+"lat"+EQUAL+latitude);
+      uri = URI.create(uri.toString()+AMPERSAND+"long"+EQUAL+longitude +AMPERSAND+"lat"+EQUAL+latitude);
     }
     return sendRequest(uri, HttpMethod.POST);
   }
