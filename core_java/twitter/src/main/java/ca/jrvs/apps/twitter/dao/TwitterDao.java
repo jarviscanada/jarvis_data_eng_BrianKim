@@ -62,7 +62,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
     return sendRequest(uri, HttpMethod.POST);
   }
 
-  private Tweet sendRequest(URI requestURI, HttpMethod method) {
+  public Tweet sendRequest(URI requestURI, HttpMethod method) {
     try {
       HttpResponse response = null;
       if (method == HttpMethod.POST) {
