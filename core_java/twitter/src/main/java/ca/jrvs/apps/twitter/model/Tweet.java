@@ -1,10 +1,12 @@
 package ca.jrvs.apps.twitter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
+// @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
     "created_at",
     "id",
@@ -33,82 +35,102 @@ public class Tweet {
   private boolean favorited;
   private boolean retweeted;
 
+  @JsonProperty("created_at")
   public String getCreatedAt() {
     return createdAt;
   }
 
+  @JsonProperty("created_at")
   public void setCreatedAt(String createdAt) {
     this.createdAt = createdAt;
   }
 
+  @JsonProperty("id")
   public Long getId() {
     return id;
   }
 
+  @JsonProperty("id")
   public void setId(Long id) {
     this.id = id;
   }
 
+  @JsonProperty("id_str")
   public String getIdStr() {
     return idStr;
   }
 
+  @JsonProperty("id_str")
   public void setIdStr(String idStr) {
     this.idStr = idStr;
   }
 
+  @JsonProperty("text")
   public String getText() {
     return text;
   }
 
+  @JsonProperty("text")
   public void setText(String text) {
     this.text = text;
   }
 
+  @JsonProperty("entities")
   public Entities getEntities() {
     return entities;
   }
 
+  @JsonProperty("entities")
   public void setEntities(Entities entities) {
     this.entities = entities;
   }
 
+  @JsonProperty("coordinates")
   public Coordinates getCoordinates() {
     return coordinates;
   }
 
+  @JsonProperty("coordinates")
   public void setCoordinates(Coordinates coordinates) {
     this.coordinates = coordinates;
   }
 
+  @JsonProperty("retweet_count")
   public String getRetweetCount() {
     return retweetCount;
   }
 
+  @JsonProperty("retweet_count")
   public void setRetweetCount(String retweetCount) {
     this.retweetCount = retweetCount;
   }
 
+  @JsonProperty("favorite_count")
   public String getFavoriteCount() {
     return favoriteCount;
   }
 
+  @JsonProperty("favorite_count")
   public void setFavoriteCount(String favoriteCount) {
     this.favoriteCount = favoriteCount;
   }
 
+  @JsonProperty("favorited")
   public boolean isFavorited() {
     return favorited;
   }
 
+  @JsonProperty("favorited")
   public void setFavorited(boolean favorited) {
     this.favorited = favorited;
   }
 
+  @JsonProperty("retweeted")
   public boolean isRetweeted() {
     return retweeted;
   }
 
+  @JsonProperty("retweeted")
   public void setRetweeted(boolean retweeted) {
     this.retweeted = retweeted;
   }
