@@ -7,12 +7,14 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
 public class TwitterHttpHelperTest extends TestCase {
+
   TwitterHttpHelper helper = new TwitterHttpHelper(
       System.getenv("consumerKey"), System.getenv("consumerSecret"),
       System.getenv("accessToken"), System.getenv("tokenSecret"));
   PercentEscaper percentEscaper = new PercentEscaper("", false);
   String status = "Testing tweet status post again";
-  String postUri = "https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status);
+  String postUri =
+      "https://api.twitter.com/1.1/statuses/update.json?status=" + percentEscaper.escape(status);
   String showUri = "https://api.twitter.com/1.1/statuses/show.json?id=1379095346366844939";
   String deleteUri = "https://api.twitter.com/1.1/statuses/destroy/1377650230611615748.json";
 

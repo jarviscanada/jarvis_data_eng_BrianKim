@@ -11,7 +11,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -19,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 
 public class TwitterHttpHelper implements HttpHelper {
+
   private OAuthConsumer consumer;
   private HttpClient httpClient;
   private Logger logger = LoggerFactory.getLogger(TwitterHttpHelper.class);
@@ -30,7 +30,8 @@ public class TwitterHttpHelper implements HttpHelper {
     PercentEscaper percentEscaper = new PercentEscaper("", false);
 
     String status = "This is a tweet using the HttpHelper class.";
-    String postUri = "https://api.twitter.com/1.1/statuses/update.json?status="+percentEscaper.escape(status);
+    String postUri =
+        "https://api.twitter.com/1.1/statuses/update.json?status=" + percentEscaper.escape(status);
     String showUri = "https://api.twitter.com/1.1/statuses/show.json?id=1379095346366844939";
     String deleteUri = "https://api.twitter.com/1.1/statuses/destroy/1377650230611615748.json";
 
@@ -78,7 +79,7 @@ public class TwitterHttpHelper implements HttpHelper {
       consumer.sign(request);
       return httpClient.execute(request);
     } else {
-      throw new IllegalArgumentException("Wrong method input: "+method.name());
+      throw new IllegalArgumentException("Wrong method input: " + method.name());
     }
   }
 }

@@ -1,12 +1,9 @@
 package ca.jrvs.apps.twitter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import java.util.List;
 
-// @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonPropertyOrder({
     "id",
@@ -16,6 +13,7 @@ import java.util.List;
     "screen_name"
 })
 public class UserMention {
+
   private Long id;
   @JsonProperty("id_str")
   private String idStr;

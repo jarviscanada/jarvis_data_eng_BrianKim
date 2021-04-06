@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.sun.codemodel.internal.JClass;
 import java.io.IOException;
 
 public class JsonParser {
 
   /**
    * Convert a Java object to JSON string
+   *
    * @param object
    * @param prettyJson
    * @param includeNullValues
@@ -18,7 +18,7 @@ public class JsonParser {
    * @throws JsonProcessingException
    */
   public static String toJson(Object object, boolean prettyJson, boolean includeNullValues)
-    throws JsonProcessingException {
+      throws JsonProcessingException {
     ObjectMapper m = new ObjectMapper();
     if (!includeNullValues) {
       m.setSerializationInclusion(Include.NON_NULL);
@@ -31,6 +31,7 @@ public class JsonParser {
 
   /**
    * Parse JSON string to an Java object
+   *
    * @param json
    * @param clazz
    * @param <T>

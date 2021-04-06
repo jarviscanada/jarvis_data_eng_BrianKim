@@ -1,10 +1,8 @@
 package ca.jrvs.apps.twitter.dao;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.model.Coordinates;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.util.TweetUtil;
-import java.net.URI;
 import junit.framework.TestCase;
 import org.junit.Before;
 
@@ -13,7 +11,7 @@ public class TwitterDaoIntTest extends TestCase {
   TwitterDao twitterDao;
   String mention = "TorontoStar";
   String hashTag = "covid";
-  String text = "@"+mention+" This is a test tweet 5 "+"#"+hashTag;
+  String text = "@" + mention + " This is a test tweet 5 " + "#" + hashTag;
   Float latitude = 43.65f;
   Float longitude = -79.38f;
 
@@ -23,7 +21,8 @@ public class TwitterDaoIntTest extends TestCase {
     String consumerSecret = System.getenv("consumerSecret");
     String accessToken = System.getenv("accessToken");
     String tokenSecret = System.getenv("tokenSecret");
-    HttpHelper httpHelper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken, tokenSecret);
+    HttpHelper httpHelper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken,
+        tokenSecret);
     twitterDao = new TwitterDao(httpHelper);
   }
 

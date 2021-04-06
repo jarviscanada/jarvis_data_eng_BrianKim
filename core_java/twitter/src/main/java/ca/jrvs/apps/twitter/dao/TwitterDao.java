@@ -31,29 +31,34 @@ public class TwitterDao implements CrdDao<Tweet, String> {
   private HttpHelper httpHelper;
 
   @Autowired
-  public TwitterDao(HttpHelper httpHelper) { this.httpHelper = httpHelper; }
+  public TwitterDao(HttpHelper httpHelper) {
+    this.httpHelper = httpHelper;
+  }
 
   @Override
   public Tweet create(Tweet entity) {
-    URI uri = URI.create(API_BASE_URI+POST_PATH+QUERY_SYM+"status"+EQUAL+percentEscaper.escape(entity.getText()));
+    URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper
+        .escape(entity.getText()));
     //[long, lat]
     if (entity.getCoordinates() != null) {
       String longitude = entity.getCoordinates().getCoordinates()[0].toString();
       String latitude = entity.getCoordinates().getCoordinates()[1].toString();
-      uri = URI.create(uri.toString()+AMPERSAND+"long"+EQUAL+longitude +AMPERSAND+"lat"+EQUAL+latitude);
+      uri = URI.create(
+          uri.toString() + AMPERSAND + "long" + EQUAL + longitude + AMPERSAND + "lat" + EQUAL
+              + latitude);
     }
     return sendRequest(uri, HttpMethod.POST);
   }
 
   @Override
   public Tweet findById(String s) {
-    URI uri = URI.create(API_BASE_URI+SHOW_PATH+QUERY_SYM+"id"+EQUAL+s);
+    URI uri = URI.create(API_BASE_URI + SHOW_PATH + QUERY_SYM + "id" + EQUAL + s);
     return sendRequest(uri, HttpMethod.GET);
   }
 
   @Override
   public Tweet deleteById(String s) {
-    URI uri = URI.create(API_BASE_URI+DELETE_PATH+s+".json");
+    URI uri = URI.create(API_BASE_URI + DELETE_PATH + s + ".json");
     return sendRequest(uri, HttpMethod.POST);
   }
 
@@ -66,11 +71,13 @@ public class TwitterDao implements CrdDao<Tweet, String> {
         response = httpHelper.httpGet(requestURI);
       }
 
-      if (response == null)
+      if (response == null) {
         throw new RuntimeException("Failed to retrieve response");
+      }
 
-      if (response.getStatusLine().getStatusCode() != HTTP_OK)
+      if (response.getStatusLine().getStatusCode() != HTTP_OK) {
         throw new RuntimeException("Unexpected HTTP status.");
+      }
 
       return JsonParser.toObjectFromJson(EntityUtils.toString(response.getEntity()), Tweet.class);
     } catch (IOException e) {
