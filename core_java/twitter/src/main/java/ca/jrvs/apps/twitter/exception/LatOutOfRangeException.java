@@ -1,6 +1,6 @@
 package ca.jrvs.apps.twitter.exception;
 
-public class LatOutOfRangeException extends RuntimeException {
+public class LatOutOfRangeException extends Exception {
   public LatOutOfRangeException() {
     super();
   }

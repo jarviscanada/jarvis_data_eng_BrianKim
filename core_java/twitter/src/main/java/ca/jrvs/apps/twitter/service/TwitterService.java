@@ -18,38 +18,39 @@ public class TwitterService implements Service {
   private static final Logger logger = LoggerFactory.getLogger(TwitterService.class);
 
   public TwitterService(CrdDao dao) { this.dao = dao; }
+
   @Override
-  public Tweet postTweet(Tweet tweet) {
+  public Tweet postTweet(Tweet tweet) throws IllegalArgumentException {
     try {
       validatePostTweet(tweet);
-    } catch (RuntimeException e) {
-      logger.error("Failed to validate tweet: ", e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException();
     }
 
     return (Tweet) dao.create(tweet);
   }
 
   @Override
-  public Tweet showTweet(String id, String[] fields) {
+  public Tweet showTweet(String id, String[] fields) throws IllegalArgumentException {
     try {
       validateShowDeleteTweet(id);
-    } catch (RuntimeException e) {
-      logger.error("Failed to validate the user input ID: ", e);
+    } catch (Exception e) {
+      throw new IllegalArgumentException();
     }
 
     return (Tweet) dao.findById(id);
   }
 
   @Override
-  public List<Tweet> deleteTweets(String[] ids) {
+  public List<Tweet> deleteTweets(String[] ids) throws  IllegalArgumentException {
     List<Tweet> tweets = new ArrayList<>();
     Arrays.stream(ids)
         .forEach(id -> {
           try {
             validateShowDeleteTweet(id);
             tweets.add((Tweet) dao.deleteById(id));
-          } catch (RuntimeException e) {
-            logger.error("Failed to validate the user input ID: ", e);
+          } catch (Exception e) {
+            throw new IllegalArgumentException();
           }
         });
     return tweets;

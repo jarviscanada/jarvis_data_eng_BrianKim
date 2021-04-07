@@ -39,6 +39,16 @@ public class TwitterServiceIntTest {
 
   @Test
   public void postTweet() {
+    // expected bad case
+    Tweet badTweet = TweetUtil.builder(badText, latitude, longitude);
+    try {
+      twitterService.postTweet(badTweet);
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+
+    // expected good case
     Tweet sentTweet = TweetUtil.builder(text, latitude, longitude);
     Tweet responseTweet = twitterService.postTweet(sentTweet);
 
@@ -54,6 +64,15 @@ public class TwitterServiceIntTest {
 
   @Test
   public void showTweet() {
+    // expected bad case
+    try {
+      twitterService.showTweet(badIdStr, new String[]{});
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+
+    // expected good case
     String id = "1379798677959610371";
     Tweet responseTweet = twitterService.showTweet(id, new String[]{});
 
@@ -69,6 +88,15 @@ public class TwitterServiceIntTest {
 
   @Test
   public void deleteTweets() {
+    // expected bad case
+    try {
+      twitterService.deleteTweets(new String[]{badIdStr});
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+
+    // expected good case
     List<Tweet> deletedTweets = twitterService.deleteTweets(new String[]{"1379798677959610371"});
 
     assertNotNull(deletedTweets.get(0));

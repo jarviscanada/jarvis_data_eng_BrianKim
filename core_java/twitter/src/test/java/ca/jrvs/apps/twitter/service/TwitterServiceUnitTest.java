@@ -56,14 +56,14 @@ public class TwitterServiceUnitTest {
     try {
       twitterService.validatePostTweet(TweetUtil.builder("this has wrong longitude", badLon, 73f));
       fail();
-    } catch (LatOutOfRangeException e) {
+    } catch (LatOutOfRangeException | CharacterExceedException | LongOutOfRangeException e) {
       assertTrue(true);
     }
 
     try {
       twitterService.validatePostTweet(TweetUtil.builder(badText, 49f, 73f));
       fail();
-    } catch (CharacterExceedException e) {
+    } catch (CharacterExceedException | LongOutOfRangeException | LatOutOfRangeException e) {
       assertTrue(true);
     }
 
