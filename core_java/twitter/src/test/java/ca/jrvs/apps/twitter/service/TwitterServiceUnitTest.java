@@ -68,10 +68,34 @@ public class TwitterServiceUnitTest {
     }
 
     try {
-      twitterService.validateShowDeleteTweet(badIdStr);
+      twitterService.validateIdTweet(badIdStr);
       fail();
     } catch (UserIdInputFormatException e) {
       assertTrue(true);
     }
+  }
+
+  @Test
+  public void validateFieldTweet() {
+    // expected bad case
+    try {
+      twitterService.validateFieldTweet(new String[]{"this_is", "wrong_field"});
+      fail();
+    } catch (IllegalArgumentException e) {
+      assertTrue(true);
+    }
+
+    // expected good case
+    try {
+      twitterService.validateFieldTweet(new String[]{"id", "id_str", "coordinates"});
+      assertTrue(true);
+    } catch (IllegalArgumentException e) {
+      fail();
+    }
+  }
+
+  @Test
+  public void filterTweet() {
+//    Tweet responseTweet =
   }
 }
