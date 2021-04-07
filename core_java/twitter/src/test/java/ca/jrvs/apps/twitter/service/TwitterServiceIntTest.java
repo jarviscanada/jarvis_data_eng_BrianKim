@@ -5,8 +5,10 @@ import static org.junit.Assert.*;
 import ca.jrvs.apps.twitter.dao.TwitterDao;
 import ca.jrvs.apps.twitter.dao.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
+import ca.jrvs.apps.twitter.example.JsonParser;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.util.TweetUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +19,7 @@ public class TwitterServiceIntTest {
   TwitterDao twitterDao;
   String mention = "TorontoStar";
   String hashTag = "covid";
-  String text = "@" + mention + " This is a test tweet 6 " + "#" + hashTag;
+  String text = "@" + mention + " This is a test tweet 7 " + "#" + hashTag;
   Float latitude = 43.65f;
   Float longitude = -79.38f;
   String badText = "Miusov, as a man man of breeding and deilcacy, could not but feel some inwrd qualms, when he reached the Father Superior's with Ivan: he felt ashamed of havin lost his temper. He felt that he ought to have disdaimed that despicable wretch, Fyodor Pavlovitch, too much to have been upset by him in Father Zossima's cell, and so to have forgotten himself. \"Teh monks were not to blame, in any case,\" he reflceted, on the steps.";
@@ -73,17 +75,20 @@ public class TwitterServiceIntTest {
     }
 
     // expected good case
-    String id = "1379798677959610371";
-    Tweet responseTweet = twitterService.showTweet(id, new String[]{});
+    String id = "1379849145305989124";
+    Tweet responseTweet = twitterService.showTweet(id, new String[]{"created_at", "id_str", "text"});
 
     assertNotNull(responseTweet);
     assertEquals(text, responseTweet.getText());
+    assertEquals(id, responseTweet.getIdStr());
+    assertNull(responseTweet.getEntities());
 
-    assertEquals(latitude, responseTweet.getCoordinates().getCoordinates()[1]);
-    assertEquals(longitude, responseTweet.getCoordinates().getCoordinates()[0]);
-
-    assertEquals(mention, responseTweet.getEntities().getUserMentions()[0].getScreenName());
-    assertEquals(hashTag, responseTweet.getEntities().getHashtags()[0].getText());
+    try {
+      String tweetJson = JsonParser.toJson(responseTweet, true, false);
+      System.out.println(tweetJson);
+    } catch (JsonProcessingException e) {
+      fail();
+    }
   }
 
   @Test
@@ -97,7 +102,7 @@ public class TwitterServiceIntTest {
     }
 
     // expected good case
-    List<Tweet> deletedTweets = twitterService.deleteTweets(new String[]{"1379798677959610371"});
+    List<Tweet> deletedTweets = twitterService.deleteTweets(new String[]{"1379849145305989124"});
 
     assertNotNull(deletedTweets.get(0));
     assertEquals(text, deletedTweets.get(0).getText());

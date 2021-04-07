@@ -16,6 +16,18 @@ public class TwitterService implements Service {
 
   CrdDao dao;
   private static final Logger logger = LoggerFactory.getLogger(TwitterService.class);
+  private static final String[] tweetFields = {
+      "created_at",
+      "id",
+      "id_str",
+      "text",
+      "entities",
+      "coordinates",
+      "retweet_count",
+      "favorite_count",
+      "favorited",
+      "retweeted"
+  };
 
   public TwitterService(CrdDao dao) { this.dao = dao; }
 
@@ -33,12 +45,19 @@ public class TwitterService implements Service {
   @Override
   public Tweet showTweet(String id, String[] fields) throws IllegalArgumentException {
     try {
-      validateShowDeleteTweet(id);
+      validateIdTweet(id);
+      if (fields != null)
+        validateFieldTweet(fields);
     } catch (Exception e) {
       throw new IllegalArgumentException();
     }
 
-    return (Tweet) dao.findById(id);
+    Tweet responseTweet = (Tweet) dao.findById(id);
+    if (fields != null) {
+      return filterTweet(responseTweet, fields);
+    } else {
+      return responseTweet;
+    }
   }
 
   @Override
@@ -47,7 +66,7 @@ public class TwitterService implements Service {
     Arrays.stream(ids)
         .forEach(id -> {
           try {
-            validateShowDeleteTweet(id);
+            validateIdTweet(id);
             tweets.add((Tweet) dao.deleteById(id));
           } catch (Exception e) {
             throw new IllegalArgumentException();
@@ -71,11 +90,58 @@ public class TwitterService implements Service {
     }
   }
 
-  public void validateShowDeleteTweet(String id_str) throws UserIdInputFormatException {
+  public void validateIdTweet(String id_str) throws UserIdInputFormatException {
     try {
       Long.parseLong(id_str);
     } catch (Exception e) {
       throw new UserIdInputFormatException();
     }
+  }
+
+  public void validateFieldTweet(String[] fields) throws IllegalArgumentException {
+    Arrays.stream(fields).forEach(field -> {
+      if (Arrays.stream(tweetFields).noneMatch(element -> element.equals(field)))
+        throw new IllegalArgumentException();
+    });
+  }
+
+  public Tweet filterTweet(Tweet returnedTweet, String[] fields) {
+    Tweet filteredTweet = new Tweet();
+
+    Arrays.stream(fields).forEach(field -> {
+      switch (field) {
+        case "created_at":
+          filteredTweet.setCreatedAt(returnedTweet.getCreatedAt());
+          break;
+        case "id":
+          filteredTweet.setId(returnedTweet.getId());
+          break;
+        case "id_str":
+          filteredTweet.setIdStr(returnedTweet.getIdStr());
+          break;
+        case "text":
+          filteredTweet.setText(returnedTweet.getText());
+          break;
+        case "entities":
+          filteredTweet.setEntities(returnedTweet.getEntities());
+          break;
+        case "coordinates":
+          filteredTweet.setCoordinates(returnedTweet.getCoordinates());
+          break;
+        case "retweet_count":
+          filteredTweet.setRetweetCount(returnedTweet.getRetweetCount());
+          break;
+        case "favorite_count":
+          filteredTweet.setFavoriteCount(returnedTweet.getFavoriteCount());
+          break;
+        case "favorited":
+          filteredTweet.setFavorited(returnedTweet.isFavorited());
+          break;
+        case "retweeted":
+          filteredTweet.setRetweeted(returnedTweet.isRetweeted());
+          break;
+      }
+    });
+    return filteredTweet;
   }
 }
