@@ -85,7 +85,7 @@ public class TwitterServiceIntTest {
 
     try {
       String tweetJson = JsonParser.toJson(responseTweet, true, false);
-      System.out.println(tweetJson);
+      assertTrue(true);
     } catch (JsonProcessingException e) {
       fail();
     }
