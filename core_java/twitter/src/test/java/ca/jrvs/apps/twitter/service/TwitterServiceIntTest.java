@@ -1,0 +1,83 @@
+package ca.jrvs.apps.twitter.service;
+
+import static org.junit.Assert.*;
+
+import ca.jrvs.apps.twitter.dao.TwitterDao;
+import ca.jrvs.apps.twitter.dao.TwitterHttpHelper;
+import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
+import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.util.TweetUtil;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TwitterServiceIntTest {
+
+  TwitterService twitterService;
+  TwitterDao twitterDao;
+  String mention = "TorontoStar";
+  String hashTag = "covid";
+  String text = "@" + mention + " This is a test tweet 6 " + "#" + hashTag;
+  Float latitude = 43.65f;
+  Float longitude = -79.38f;
+  String badText = "Miusov, as a man man of breeding and deilcacy, could not but feel some inwrd qualms, when he reached the Father Superior's with Ivan: he felt ashamed of havin lost his temper. He felt that he ought to have disdaimed that despicable wretch, Fyodor Pavlovitch, too much to have been upset by him in Father Zossima's cell, and so to have forgotten himself. \"Teh monks were not to blame, in any case,\" he reflceted, on the steps.";
+  Float badLon = -100f;
+  Float badLat = 100f;
+  String badIdStr = "this is not an id";
+
+  @Before
+  public void setUp() {
+    String consumerKey = System.getenv("consumerKey");
+    String consumerSecret = System.getenv("consumerSecret");
+    String accessToken = System.getenv("accessToken");
+    String tokenSecret = System.getenv("tokenSecret");
+    HttpHelper httpHelper = new TwitterHttpHelper(consumerKey, consumerSecret, accessToken,
+        tokenSecret);
+    twitterDao = new TwitterDao(httpHelper);
+    twitterService = new TwitterService(twitterDao);
+  }
+
+  @Test
+  public void postTweet() {
+    Tweet sentTweet = TweetUtil.builder(text, latitude, longitude);
+    Tweet responseTweet = twitterService.postTweet(sentTweet);
+
+    assertNotNull(responseTweet);
+    assertEquals(text, responseTweet.getText());
+
+    assertEquals(latitude, responseTweet.getCoordinates().getCoordinates()[1]);
+    assertEquals(longitude, responseTweet.getCoordinates().getCoordinates()[0]);
+
+    assertEquals(mention, responseTweet.getEntities().getUserMentions()[0].getScreenName());
+    assertEquals(hashTag, responseTweet.getEntities().getHashtags()[0].getText());
+  }
+
+  @Test
+  public void showTweet() {
+    String id = "1379798677959610371";
+    Tweet responseTweet = twitterService.showTweet(id, new String[]{});
+
+    assertNotNull(responseTweet);
+    assertEquals(text, responseTweet.getText());
+
+    assertEquals(latitude, responseTweet.getCoordinates().getCoordinates()[1]);
+    assertEquals(longitude, responseTweet.getCoordinates().getCoordinates()[0]);
+
+    assertEquals(mention, responseTweet.getEntities().getUserMentions()[0].getScreenName());
+    assertEquals(hashTag, responseTweet.getEntities().getHashtags()[0].getText());
+  }
+
+  @Test
+  public void deleteTweets() {
+    List<Tweet> deletedTweets = twitterService.deleteTweets(new String[]{"1379798677959610371"});
+
+    assertNotNull(deletedTweets.get(0));
+    assertEquals(text, deletedTweets.get(0).getText());
+
+    assertEquals(latitude, deletedTweets.get(0).getCoordinates().getCoordinates()[1]);
+    assertEquals(longitude, deletedTweets.get(0).getCoordinates().getCoordinates()[0]);
+
+    assertEquals(mention, deletedTweets.get(0).getEntities().getUserMentions()[0].getScreenName());
+    assertEquals(hashTag, deletedTweets.get(0).getEntities().getHashtags()[0].getText());
+  }
+}
