@@ -1,5 +1,6 @@
 package ca.jrvs.apps.twitter.dao;
 
+import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.net.URI;
 import org.apache.http.HttpResponse;

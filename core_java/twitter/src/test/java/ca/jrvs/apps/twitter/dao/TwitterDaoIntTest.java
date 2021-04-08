@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter.dao;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
+import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.model.Tweet;
 import ca.jrvs.apps.twitter.util.TweetUtil;
 import org.junit.Assert;
@@ -12,9 +13,10 @@ public class TwitterDaoIntTest {
   TwitterDao twitterDao;
   String mention = "TorontoStar";
   String hashTag = "covid";
-  String text = "@" + mention + " This is a test tweet 5 " + "#" + hashTag;
+  String text = "@" + mention + " This is a test tweet " + "#" + hashTag + " " + System.currentTimeMillis();
   Float latitude = 43.65f;
   Float longitude = -79.38f;
+  String id;
 
   @Before
   public void setUp() {
@@ -31,6 +33,7 @@ public class TwitterDaoIntTest {
   public void testCreate() {
     Tweet sentTweet = TweetUtil.builder(text, latitude, longitude);
     Tweet responseTweet = twitterDao.create(sentTweet);
+    id = responseTweet.getIdStr();
 
     Assert.assertEquals(text, responseTweet.getText());
 
@@ -44,8 +47,7 @@ public class TwitterDaoIntTest {
 
   @Test
   public void testFindById() {
-    String id = "1379471678179270659";
-    Tweet responseTweet = twitterDao.findById(id);
+    Tweet responseTweet = twitterDao.findById("1380217336796418048");
 
     Assert.assertEquals(text, responseTweet.getText());
 
@@ -59,7 +61,6 @@ public class TwitterDaoIntTest {
 
   @Test
   public void testDeleteById() {
-    String id = "1379472129847128065";
     Tweet deletedTweet = twitterDao.deleteById(id);
 
     Assert.assertEquals(text, deletedTweet.getText());
