@@ -1,7 +1,8 @@
-package ca.jrvs.apps.twitter.service;
+package ca.jrvs.apps.twitter.controller;
 
 import ca.jrvs.apps.twitter.controller.Controller;
 import ca.jrvs.apps.twitter.model.Tweet;
+import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.util.TweetUtil;
 import java.util.List;
 
@@ -16,33 +17,24 @@ public class TwitterController implements Controller {
 
   @Override
   public Tweet postTweet(String[] args) throws IllegalArgumentException {
-    Float[] latLon = parseLatLon(args[1]);
-    Tweet requestTweet = TweetUtil.builder(args[0], latLon[0], latLon[1]);
+    String[] latLon = args[1].split(COORD_SEP);
+    Tweet requestTweet = TweetUtil.builder(args[0], Float.parseFloat(latLon[0]), Float.parseFloat(latLon[1]));
     return service.postTweet(requestTweet);
   }
 
   @Override
   public Tweet showTweet(String[] args) throws IllegalArgumentException {
-    String[] fields = args[1].split(COMMA);
-    return service.showTweet(args[0], fields);
+    if (args.length == 1)
+      return service.showTweet(args[0], null);
+    else {
+      String[] fields = args[1].split(COMMA);
+      return service.showTweet(args[0], fields);
+    }
   }
 
   @Override
   public List<Tweet> deleteTweet(String[] args) throws IllegalArgumentException {
-    return service.deleteTweets(args);
-  }
-
-  public Float[] parseLatLon(String s) throws IllegalArgumentException {
-    String[] latLon = s.split(COORD_SEP);
-
-    if (latLon.length != 2)
-      throw new IllegalArgumentException();
-    try {
-      float lat = Float.parseFloat(latLon[0]);
-      float lon = Float.parseFloat(latLon[1]);
-      return new Float[]{lat, lon};
-    } catch (Exception e) {
-      throw new IllegalArgumentException();
-    }
+    String[] fields = args[0].split(COMMA);
+    return service.deleteTweets(fields);
   }
 }

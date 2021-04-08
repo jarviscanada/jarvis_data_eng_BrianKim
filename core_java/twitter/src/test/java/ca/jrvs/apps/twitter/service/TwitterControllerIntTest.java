@@ -2,6 +2,7 @@ package ca.jrvs.apps.twitter.service;
 
 import static org.junit.Assert.*;
 
+import ca.jrvs.apps.twitter.controller.TwitterController;
 import ca.jrvs.apps.twitter.dao.TwitterDao;
 import ca.jrvs.apps.twitter.dao.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;

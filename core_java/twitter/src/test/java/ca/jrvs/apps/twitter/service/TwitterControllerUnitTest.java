@@ -3,6 +3,7 @@ package ca.jrvs.apps.twitter.service;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import ca.jrvs.apps.twitter.controller.TwitterController;
 import ca.jrvs.apps.twitter.model.Tweet;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class TwitterControllerUnitTest {
   @Mock Service service;
-  @InjectMocks TwitterController twitterController;
+  @InjectMocks
+  TwitterController twitterController;
 
   @Test
   public void postTweet() {
