@@ -10,7 +10,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TwitterDao implements CrdDao<Tweet, String> {
 
   //URI constants
@@ -37,8 +39,7 @@ public class TwitterDao implements CrdDao<Tweet, String> {
 
   @Override
   public Tweet create(Tweet entity) {
-    URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper
-        .escape(entity.getText()));
+    URI uri = URI.create(API_BASE_URI + POST_PATH + QUERY_SYM + "status" + EQUAL + percentEscaper.escape(entity.getText()));
     //[long, lat]
     if (entity.getCoordinates() != null) {
       String longitude = entity.getCoordinates().getCoordinates()[0].toString();

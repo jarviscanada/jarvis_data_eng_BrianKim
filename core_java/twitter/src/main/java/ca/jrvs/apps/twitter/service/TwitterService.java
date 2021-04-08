@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@org.springframework.stereotype.Service
 public class TwitterService implements Service {
 
   CrdDao dao;
@@ -29,6 +31,7 @@ public class TwitterService implements Service {
       "retweeted"
   };
 
+  @Autowired
   public TwitterService(CrdDao dao) { this.dao = dao; }
 
   @Override

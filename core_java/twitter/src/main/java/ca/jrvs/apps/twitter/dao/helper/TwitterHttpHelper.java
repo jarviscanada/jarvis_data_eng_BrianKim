@@ -1,6 +1,5 @@
-package ca.jrvs.apps.twitter.dao;
+package ca.jrvs.apps.twitter.dao.helper;
 
-import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import com.google.gdata.util.common.base.PercentEscaper;
 import java.io.IOException;
 import java.net.URI;
@@ -16,7 +15,9 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TwitterHttpHelper implements HttpHelper {
 
   private OAuthConsumer consumer;
@@ -47,6 +48,19 @@ public class TwitterHttpHelper implements HttpHelper {
     consumer = new CommonsHttpOAuthConsumer(consumerKey, consumerSecret);
     consumer.setTokenWithSecret(accessToken, tokenSecret);
 
+    httpClient = HttpClientBuilder.create().build();
+  }
+
+  public TwitterHttpHelper() {
+    String consumerKey = System.getenv("consumerKey");
+    String consumerSecret = System.getenv("consumerSecret");
+    String accessToken = System.getenv("accessToken");
+    String tokenSecret = System.getenv("tokenSecret");
+    consumer = new CommonsHttpOAuthConsumer(consumerKey, consumerSecret);
+    consumer.setTokenWithSecret(accessToken, tokenSecret);
+    /**
+     * Default = single connection.
+     */
     httpClient = HttpClientBuilder.create().build();
   }
 
