@@ -3,7 +3,6 @@ package ca.jrvs.apps.grep;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +22,8 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
 
     try {
       javaGrepImp.process();
-    } catch (IOException e) {
-      javaGrepImp.logger.error("Error: I/O Exception", e);
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to process file.", e);
     }
   }
 
@@ -53,14 +52,14 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
 
   @Override
   public List<String> readLines(File inputFile) {
-    List<String> lineList = new ArrayList<>();
+    List<String> lineList;
 
     try {
       BufferedReader reader = new BufferedReader(new FileReader(inputFile));
       lineList = reader.lines().collect(Collectors.toList());
       reader.close();
     } catch (Exception e) {
-      logger.error("Error: I/O Exception", e);
+      throw new RuntimeException("Failed to read lines in inputFile", e);
     }
     return lineList;
   }
