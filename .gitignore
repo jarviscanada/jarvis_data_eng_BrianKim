@@ -7,3 +7,5 @@ target/
 *.iml
 .idea/
 .eclipse
+profile/
+.DS_Store
