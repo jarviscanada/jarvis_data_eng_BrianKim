@@ -36,8 +36,7 @@ public abstract class DataAccessObject <T extends DataTransferObject> {
       }
       return key;
     } catch (SQLException e) {
-      logger.error("SQLException Error: "+e.getLocalizedMessage(), e);
-      throw new RuntimeException(e);
+      throw new RuntimeException("SQLException error: Failed to get last val", e);
     }
   }
 }

@@ -4,7 +4,6 @@ package ca.jrvs.apps.grep;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.apache.log4j.BasicConfigurator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +33,7 @@ public class JavaGrepImp implements JavaGrep {
     try {
       javaGrepImp.process();
     } catch (Exception e) {
-      javaGrepImp.logger.error("Error: I/O Exception", e);
+      throw new RuntimeException("I/O exception: failed to process file.", e);
     }
   }
 
@@ -82,7 +80,7 @@ public class JavaGrepImp implements JavaGrep {
       lineList = reader.lines().collect(Collectors.toList());
       reader.close();
     } catch (Exception e) {
-      logger.error("Error: I/O Exception.", e);
+      throw new RuntimeException("I/O Exception: failed to read lines.", e);
     }
     return lineList;
   }
