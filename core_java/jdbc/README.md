@@ -10,14 +10,13 @@ CustomerDAO and OrdersDAO are implemented to perform CRUD operations against the
 
 ## Design Patterns
 **DAO (Data Access Object) Pattern:** <br>
-- DAO is a pattern used to abstract the data persistence in a software that manages connections to databases.
-When it's used as an interface, the input and output will be a Data Transfter Object. DTO is a fully encapsulated object which provides single-domain of data.
-DAO effectively encapsulates complex joins, pass, and aggregations. As an abstraction layer, it hides the ugly business queries and only provide functionality to the user. 
+- DAO is a pattern used to abstract the data persistence in software that manages connections to databases.
+When it's used as an interface, the input and output will be a Data Transfer Object. DTO is a fully encapsulated object which provides a single domain of data.
+DAO effectively encapsulates complex joins, pass, and aggregations. As an abstraction layer, it hides the ugly business queries and only provides functionality to the user. 
 
 **Repository Pattern:** <br>
 - The Repository pattern focuses on single table access per class. It is a higher abstraction layer that exists over the DAO layer.
-  Implementation of repositories might have different DAOs as its members. Repository pattern allows you to shard your database so that
-  accessing a single table is easier than the whole database. Because of this, in distributed database systems, this pattern is helpful as your store and manage shards of database horizontally. 
+  Implementation of repositories might have different DAOs as its members. Repository pattern allows you to shard your database so that accessing a single table is easier than the whole database. Because of this, in distributed database systems, this pattern is helpful as your store and manage shards of database horizontally. 
 
 # Test
 The database was set up in a dockerized PostgreSQL instance. Inside the `JDBCExecutor` which is the class acting as the client, manual tests were done inside the `main` method.
