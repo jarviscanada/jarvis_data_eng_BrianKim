@@ -1,5 +1,4 @@
 # Introduction
-(50-100 words)
 Twitter App is a Java app that allows users to post/show/delete a Twitter post using Twitter REST API. 
 This app implements the MVC and DAO pattern to access Twitter REST API. A HttpClient will create a POST/GET/DELETE request, 
 signed with the OAuth 1.0 authorization method, and send it to the Twitter server and get the response back in JSON, which is 
