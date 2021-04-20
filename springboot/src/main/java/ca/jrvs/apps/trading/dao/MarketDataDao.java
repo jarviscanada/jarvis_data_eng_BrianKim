@@ -130,46 +130,46 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
   @Override
   public <S extends IexQuote> S save(S s) {
-    return null;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public <S extends IexQuote> Iterable<S> saveAll(Iterable<S> iterable) {
-    return null;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public boolean existsById(String s) {
-    return false;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public Iterable<IexQuote> findAll() {
-    return null;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public long count() {
-    return 0;
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void deleteById(String s) {
-
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void delete(IexQuote iexQuote) {
-
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void deleteAll(Iterable<? extends IexQuote> iterable) {
-
+    throw new UnsupportedOperationException("Not implemented");
   }
 
   @Override
   public void deleteAll() {
-
+    throw new UnsupportedOperationException("Not implemented");
   }
 }
