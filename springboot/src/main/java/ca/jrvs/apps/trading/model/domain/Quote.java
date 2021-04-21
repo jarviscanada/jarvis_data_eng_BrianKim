@@ -5,11 +5,11 @@ public class Quote implements Entity<String> {
 
 
   private String ticker;
-  private Double lastPrice;
-  private Double bidPrice;
-  private Integer bidSize;
-  private Double askPrice;
-  private Integer askSize;
+  private Double lastPrice = 0d;
+  private Double bidPrice = 0d;
+  private Integer bidSize = 0;
+  private Double askPrice = 0d;
+  private Integer askSize = 0;
 
   @Override
   public String getId() { return ticker; }

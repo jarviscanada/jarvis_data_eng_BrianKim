@@ -40,7 +40,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    * @throws DataAccessException for unexpected SQL result or SQL Execution failure
    */
   @Override
-  public <S extends Quote> S save(S quote) throws DataAccessException {
+  public <S extends Quote> S save(S quote) {
     if (existsById(quote.getId())) {
       int updatedRowNo = updateOne(quote);
       if (updatedRowNo != 1) {
@@ -53,7 +53,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   }
 
   @Override
-  public <S extends Quote> Iterable<S> saveAll(Iterable<S> quotes) throws DataAccessException {
+  public <S extends Quote> Iterable<S> saveAll(Iterable<S> quotes) {
     quotes.forEach(this::save);
     return quotes;
   }
@@ -61,7 +61,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   /**
    * helper method that saves one quote
    */
-  private void addOne(Quote quote) throws DataAccessException {
+  private void addOne(Quote quote) {
     SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(quote);
     int row = simpleJdbcInsert.execute(parameterSource);
     if (row != 1)
@@ -71,9 +71,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   /**
    * helper method that updates one quote
    */
-  private int updateOne(Quote quote) throws DataAccessException {
+  private int updateOne(Quote quote) {
     String update_sql = "UPDATE quote SET last_price=?, bid_price=?, "
-        + "bid_size=?, ask_price=?, ask_size=? WHERE ticker=?";
+        + "bid_size=?, ask_price=?, ask_size=? WHERE " + ID_COLUMN_NAME+ "=?";
     return jdbcTemplate.update(update_sql, makeUpdateValues(quote));
   }
 
@@ -83,8 +83,8 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    * @return UPDATE_SQL values
    */
   private Object[] makeUpdateValues(Quote quote) {
-    return new Object[]{quote.getId(), quote.getLastPrice(), quote.getBidPrice(),
-        quote.getBidSize(), quote.getAskPrice(), quote.getAskSize()};
+    return new Object[]{quote.getLastPrice(), quote.getBidPrice(),
+        quote.getBidSize(), quote.getAskPrice(), quote.getAskSize(), quote.getId()};
   }
 
   /**
@@ -92,7 +92,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    * @throws DataAccessException if failed to update
    */
   @Override
-  public Iterable<Quote> findAll() throws DataAccessException {
+  public Iterable<Quote> findAll() {
     String find_sql = "SELECT * FROM " + TABLE_NAME;
     List<Quote> quotes = jdbcTemplate
         .query(find_sql, BeanPropertyRowMapper.newInstance(Quote.class));
@@ -105,8 +105,8 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    * @return quote or Optional.empty if not found
    */
   @Override
-  public Optional<Quote> findById(String ticker) throws DataAccessException {
-    String find_sql = "SELECT * FROM " + TABLE_NAME + " WHERE ticker=?";
+  public Optional<Quote> findById(String ticker) {
+    String find_sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     try {
       Quote quote = jdbcTemplate.queryForObject(find_sql, BeanPropertyRowMapper.newInstance(Quote.class), ticker);
       return Optional.of(quote);
@@ -116,8 +116,8 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   }
 
   @Override
-  public boolean existsById(String ticker) throws DataAccessException {
-    String exists_sql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE ticker=?";
+  public boolean existsById(String ticker) {
+    String exists_sql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     Integer count = jdbcTemplate.queryForObject(exists_sql, Integer.class, ticker);
     if (count == null)
       throw new NullPointerException("SQL NULL occurred");
@@ -125,19 +125,19 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   }
 
   @Override
-  public void deleteById(String ticker) throws DataAccessException {
-    String delete_sql = "DELETE FROM " + TABLE_NAME + " WHERE ticker=?";
+  public void deleteById(String ticker) {
+    String delete_sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     jdbcTemplate.update(delete_sql, ticker);
   }
 
   @Override
-  public void deleteAll() throws DataAccessException {
+  public void deleteAll() {
     String delete_sql = "DELETE FROM " + TABLE_NAME;
     jdbcTemplate.update(delete_sql);
   }
 
   @Override
-  public long count() throws DataAccessException {
+  public long count() {
     String count_sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
     Long count = jdbcTemplate.queryForObject(count_sql, Long.class);
     if (count == null)

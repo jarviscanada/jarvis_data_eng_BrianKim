@@ -52,6 +52,4 @@ public class TestConfig {
     basicDataSource.setPassword(password);
     return basicDataSource;
   }
-
-
 }
