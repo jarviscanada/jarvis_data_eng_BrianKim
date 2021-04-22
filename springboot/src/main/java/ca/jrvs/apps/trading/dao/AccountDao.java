@@ -1,6 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
-import ca.jrvs.apps.trading.model.domain.Trader;
+import ca.jrvs.apps.trading.model.domain.Account;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
@@ -12,47 +12,37 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TraderDao extends JdbcCrudDao<Trader> {
+public class AccountDao extends JdbcCrudDao<Account> {
 
-  private static final Logger logger = LoggerFactory.getLogger(TraderDao.class);
+  private static final Logger logger = LoggerFactory.getLogger(AccountDao.class);
 
-  private final String TABLE_NAME = "trader";
+  private final String TABLE_NAME = "account";
   private final String ID_COLUMN = "id";
 
   private JdbcTemplate jdbcTemplate;
   private SimpleJdbcInsert simpleJdbcInsert;
 
   @Autowired
-  public TraderDao(DataSource dataSource) {
+  public AccountDao(DataSource dataSource) {
     this.jdbcTemplate = new JdbcTemplate(dataSource);
     this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource).withTableName(TABLE_NAME)
         .usingGeneratedKeyColumns(ID_COLUMN);
   }
 
   @Override
-  public JdbcTemplate getJdbcTemplate() {
-    return jdbcTemplate;
-  }
+  public JdbcTemplate getJdbcTemplate() { return jdbcTemplate; }
 
   @Override
-  public SimpleJdbcInsert getSimpleJdbcInsert() {
-    return simpleJdbcInsert;
-  }
+  public SimpleJdbcInsert getSimpleJdbcInsert() { return simpleJdbcInsert; }
 
   @Override
-  public String getTableName() {
-    return TABLE_NAME;
-  }
+  public String getTableName() { return TABLE_NAME; }
 
   @Override
-  public String getIdColumnName() {
-    return ID_COLUMN;
-  }
+  public String getIdColumnName() { return ID_COLUMN; }
 
   @Override
-  Class<Trader> getEntityClass() {
-    return Trader.class;
-  }
+  Class<Account> getEntityClass() { return Account.class; }
 
   /**
    * Saves all given entities.
@@ -62,28 +52,28 @@ public class TraderDao extends JdbcCrudDao<Trader> {
    * @throws IllegalArgumentException in case the given entity is {@literal null}.
    */
   @Override
-  public <S extends Trader> Iterable<S> saveAll(Iterable<S> entities) {
+  public <S extends Account> Iterable<S> saveAll(Iterable<S> entities) {
     List<S> savedEntities = new ArrayList<>();
     entities.forEach(entity -> {
       if (entity == null)
-        throw new IllegalArgumentException("Trader entity is null");
+        throw new IllegalArgumentException("Account entity is null");
       savedEntities.add(save(entity));
     });
     return savedEntities;
   }
 
   @Override
-  public int updateOne(Trader entity) {
-    throw new UnsupportedOperationException("Not implemented");
+  public int updateOne(Account entity) {
+    throw new UnsupportedOperationException("This is not implemented.");
   }
 
   @Override
-  public void delete(Trader entity) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void delete(Account entity) {
+    throw new UnsupportedOperationException("This is not implemented");
   }
 
   @Override
-  public void deleteAll(Iterable<? extends Trader> entities) {
-    throw new UnsupportedOperationException("Not implemented");
+  public void deleteAll(Iterable<? extends Account> entities) {
+    throw new UnsupportedOperationException("This is not implemented");
   }
 }

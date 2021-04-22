@@ -66,7 +66,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
       entity = Optional.ofNullable((T) getJdbcTemplate().queryForObject(select_sql,
           BeanPropertyRowMapper.newInstance(getEntityClass()), id));
     } catch (IncorrectResultSizeDataAccessException e) {
-      logger.debug("Can't find trader id: " + id, e);
+      logger.debug("Can't find entity id: " + id, e);
     }
     return entity;
   }
@@ -99,6 +99,8 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
   @Override
   public void deleteById(Integer id) {
+    if (!existsById(id))
+      throw new IllegalArgumentException("id does not exists");
     String delete_by_id = "DELETE FROM " + getTableName() + " WHERE " + getIdColumnName() + "=?";
     getJdbcTemplate().update(delete_by_id, id);
   }
