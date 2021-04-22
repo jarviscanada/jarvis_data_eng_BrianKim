@@ -1,9 +1,6 @@
 package ca.jrvs.apps.trading.model.domain;
 
 public class Quote implements Entity<String> {
-
-
-
   private String ticker;
   private Double lastPrice = 0d;
   private Double bidPrice = 0d;
