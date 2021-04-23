@@ -1,12 +1,16 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -18,6 +22,7 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
   private final String TABLE_NAME = "account";
   private final String ID_COLUMN = "id";
+  private final String TRADER_ID_COLUMN = "trader_id";
 
   private JdbcTemplate jdbcTemplate;
   private SimpleJdbcInsert simpleJdbcInsert;
@@ -41,6 +46,8 @@ public class AccountDao extends JdbcCrudDao<Account> {
   @Override
   public String getIdColumnName() { return ID_COLUMN; }
 
+  public String getTraderIdColumnName() { return TRADER_ID_COLUMN; }
+
   @Override
   Class<Account> getEntityClass() { return Account.class; }
 
@@ -62,9 +69,23 @@ public class AccountDao extends JdbcCrudDao<Account> {
     return savedEntities;
   }
 
+  public Optional<Account> findByTraderId(Integer traderId) {
+    Optional<Account> entity = Optional.empty();
+    String select_sql = "SELECT * FROM " + getTableName() + " WHERE " + getTraderIdColumnName() + "=?";
+
+    try {
+      entity = Optional.ofNullable(getJdbcTemplate().queryForObject(select_sql,
+          BeanPropertyRowMapper.newInstance(getEntityClass()), traderId));
+    } catch (IncorrectResultSizeDataAccessException e) {
+      logger.debug("Can't find entity id: " + traderId, e);
+    }
+    return entity;
+  }
+
   @Override
-  public int updateOne(Account entity) {
-    throw new UnsupportedOperationException("This is not implemented.");
+  public int updateOne(Account account) {
+    String update_sql = "UPDATE account SET amount=? WHERE " + ID_COLUMN+ "=?";
+    return getJdbcTemplate().update(update_sql, account.getAmount(), account.getId());
   }
 
   @Override

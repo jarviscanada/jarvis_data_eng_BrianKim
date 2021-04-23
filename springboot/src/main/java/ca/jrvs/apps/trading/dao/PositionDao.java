@@ -19,7 +19,7 @@ public class PositionDao {
   private static final Logger logger = LoggerFactory.getLogger(PositionDao.class);
 
   private final String TABLE_NAME = "position";
-  private final String ID_COLUMN = "id";
+  private final String ID_COLUMN = "account_id";
 
   private JdbcTemplate jdbcTemplate;
 
