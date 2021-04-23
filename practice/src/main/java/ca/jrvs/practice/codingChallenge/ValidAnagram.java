@@ -1,9 +1,10 @@
 package ca.jrvs.practice.codingChallenge;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
+/**
+ * ticket: https://www.notion.so/jarvisdev/Valid-Anagram-e2073fa53c824a9290db64732397b99b
+ */
 public class ValidAnagram {
 
   public static void main(String[] args) {

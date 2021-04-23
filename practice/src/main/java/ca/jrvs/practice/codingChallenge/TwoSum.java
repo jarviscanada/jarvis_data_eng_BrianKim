@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * ticket: https://www.notion.so/jarvisdev/Two-Sum-d19268837fac445ca06a2c22de4d3b55
+ */
 public class TwoSum {
 
   public static void main(String[] args) {
