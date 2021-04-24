@@ -2,7 +2,7 @@ package ca.jrvs.apps.trading.model.domain;
 
 public class SecurityOrder implements Entity<Integer> {
 
-  private Integer id;
+  private Integer id = 0;
   private Integer account_id;
   private String status;
   private String ticker;

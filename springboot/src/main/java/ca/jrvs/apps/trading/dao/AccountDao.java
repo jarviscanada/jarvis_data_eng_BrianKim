@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
-import ca.jrvs.apps.trading.model.domain.Quote;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,21 +34,33 @@ public class AccountDao extends JdbcCrudDao<Account> {
   }
 
   @Override
-  public JdbcTemplate getJdbcTemplate() { return jdbcTemplate; }
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
 
   @Override
-  public SimpleJdbcInsert getSimpleJdbcInsert() { return simpleJdbcInsert; }
+  public SimpleJdbcInsert getSimpleJdbcInsert() {
+    return simpleJdbcInsert;
+  }
 
   @Override
-  public String getTableName() { return TABLE_NAME; }
+  public String getTableName() {
+    return TABLE_NAME;
+  }
 
   @Override
-  public String getIdColumnName() { return ID_COLUMN; }
+  public String getIdColumnName() {
+    return ID_COLUMN;
+  }
 
-  public String getTraderIdColumnName() { return TRADER_ID_COLUMN; }
+  public String getTraderIdColumnName() {
+    return TRADER_ID_COLUMN;
+  }
 
   @Override
-  Class<Account> getEntityClass() { return Account.class; }
+  Class<Account> getEntityClass() {
+    return Account.class;
+  }
 
   /**
    * Saves all given entities.
@@ -62,8 +73,9 @@ public class AccountDao extends JdbcCrudDao<Account> {
   public <S extends Account> Iterable<S> saveAll(Iterable<S> entities) {
     List<S> savedEntities = new ArrayList<>();
     entities.forEach(entity -> {
-      if (entity == null)
+      if (entity == null) {
         throw new IllegalArgumentException("Account entity is null");
+      }
       savedEntities.add(save(entity));
     });
     return savedEntities;
@@ -71,7 +83,8 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
   public Optional<Account> findByTraderId(Integer traderId) {
     Optional<Account> entity = Optional.empty();
-    String select_sql = "SELECT * FROM " + getTableName() + " WHERE " + getTraderIdColumnName() + "=?";
+    String select_sql =
+        "SELECT * FROM " + getTableName() + " WHERE " + getTraderIdColumnName() + "=?";
 
     try {
       entity = Optional.ofNullable(getJdbcTemplate().queryForObject(select_sql,
@@ -84,7 +97,7 @@ public class AccountDao extends JdbcCrudDao<Account> {
 
   @Override
   public int updateOne(Account account) {
-    String update_sql = "UPDATE account SET amount=? WHERE " + ID_COLUMN+ "=?";
+    String update_sql = "UPDATE account SET amount=? WHERE " + ID_COLUMN + "=?";
     return getJdbcTemplate().update(update_sql, account.getAmount(), account.getId());
   }
 

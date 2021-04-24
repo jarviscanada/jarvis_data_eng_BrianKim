@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Api(value = "quote" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Controller
 @RequestMapping("/quote")
 public class QuoteController {
@@ -30,7 +30,9 @@ public class QuoteController {
   private QuoteService quoteService;
 
   @Autowired
-  public QuoteController(QuoteService quoteService) { this.quoteService = quoteService; }
+  public QuoteController(QuoteService quoteService) {
+    this.quoteService = quoteService;
+  }
 
   @ApiOperation(value = "Show iexQuote", notes = "Show iexQuote for a given ticker/symbol")
   @ApiResponses(value = {@ApiResponse(code = 404, message = "ticker is not found")})

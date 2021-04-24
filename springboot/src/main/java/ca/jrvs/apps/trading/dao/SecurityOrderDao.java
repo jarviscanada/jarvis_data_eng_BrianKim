@@ -1,6 +1,5 @@
 package ca.jrvs.apps.trading.dao;
 
-import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,21 +31,33 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
   }
 
   @Override
-  public JdbcTemplate getJdbcTemplate() { return jdbcTemplate; }
+  public JdbcTemplate getJdbcTemplate() {
+    return jdbcTemplate;
+  }
 
   @Override
-  public SimpleJdbcInsert getSimpleJdbcInsert() { return simpleJdbcInsert; }
+  public SimpleJdbcInsert getSimpleJdbcInsert() {
+    return simpleJdbcInsert;
+  }
 
   @Override
-  public String getTableName() { return TABLE_NAME; }
+  public String getTableName() {
+    return TABLE_NAME;
+  }
 
   @Override
-  public String getIdColumnName() { return ID_COLUMN; }
+  public String getIdColumnName() {
+    return ID_COLUMN;
+  }
 
-  public String getAccIdColumnName() { return ACCOUNT_ID_COLUMN; }
+  public String getAccIdColumnName() {
+    return ACCOUNT_ID_COLUMN;
+  }
 
   @Override
-  Class<SecurityOrder> getEntityClass() { return SecurityOrder.class; }
+  Class<SecurityOrder> getEntityClass() {
+    return SecurityOrder.class;
+  }
 
   /**
    * Saves all given entities.
@@ -59,8 +70,9 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
   public <S extends SecurityOrder> Iterable<S> saveAll(Iterable<S> entities) {
     List<S> savedEntities = new ArrayList<>();
     entities.forEach(entity -> {
-      if (entity == null)
+      if (entity == null) {
         throw new IllegalArgumentException("SecurityOrder enttiy is null");
+      }
       savedEntities.add(save(entity));
     });
     return savedEntities;

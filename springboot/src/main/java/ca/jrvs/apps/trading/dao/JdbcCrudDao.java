@@ -20,13 +20,18 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
   private static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
 
   abstract public JdbcTemplate getJdbcTemplate();
+
   abstract public SimpleJdbcInsert getSimpleJdbcInsert();
+
   abstract public String getTableName();
+
   abstract public String getIdColumnName();
+
   abstract Class<T> getEntityClass();
 
   /**
    * Save an entity and update auto-generated integer ID
+   *
    * @param entity to be saved
    * @return saved entity
    */
@@ -73,10 +78,12 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
   @Override
   public boolean existsById(Integer id) {
-    String exists_sql = "SELECT COUNT(*) FROM " + getTableName() + " WHERE " + getIdColumnName() + "=?";
+    String exists_sql =
+        "SELECT COUNT(*) FROM " + getTableName() + " WHERE " + getIdColumnName() + "=?";
     Integer count = getJdbcTemplate().queryForObject(exists_sql, Integer.class, id);
-    if (count == null)
+    if (count == null) {
       throw new NullPointerException("SQL NULL occurred.");
+    }
     return count == 1;
   }
 
@@ -84,7 +91,8 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
   public List<T> findAll() {
     List<T> entities;
     String find_all_sql = "SELECT * FROM " + getTableName();
-    entities = getJdbcTemplate().query(find_all_sql, BeanPropertyRowMapper.newInstance(getEntityClass()));
+    entities = getJdbcTemplate()
+        .query(find_all_sql, BeanPropertyRowMapper.newInstance(getEntityClass()));
     return entities;
   }
 
@@ -99,8 +107,9 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
   @Override
   public void deleteById(Integer id) {
-    if (!existsById(id))
+    if (!existsById(id)) {
       throw new IllegalArgumentException("id does not exists");
+    }
     String delete_by_id = "DELETE FROM " + getTableName() + " WHERE " + getIdColumnName() + "=?";
     getJdbcTemplate().update(delete_by_id, id);
   }

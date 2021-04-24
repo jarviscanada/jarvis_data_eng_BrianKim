@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.model.domain;
 
 public class Quote implements Entity<String> {
+
   private String ticker;
   private Double lastPrice = 0d;
   private Double bidPrice = 0d;
@@ -9,10 +10,14 @@ public class Quote implements Entity<String> {
   private Integer askSize = 0;
 
   @Override
-  public String getId() { return ticker; }
+  public String getId() {
+    return ticker;
+  }
 
   @Override
-  public void setId(String s) { this.ticker = s; }
+  public void setId(String s) {
+    this.ticker = s;
+  }
 
   public String getTicker() {
     return ticker;

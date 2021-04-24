@@ -2,7 +2,7 @@ package ca.jrvs.apps.trading.model.domain;
 
 public class Account implements Entity<Integer> {
 
-  private Integer id;
+  private Integer id = 0;
   private Integer trader_id;
   private Double amount;
 

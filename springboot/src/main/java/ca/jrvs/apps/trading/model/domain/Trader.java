@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class Trader implements Entity<Integer> {
 
-  private Integer id;
+  private Integer id = 0;
   private String first_name;
   private String last_name;
   private Date dob;

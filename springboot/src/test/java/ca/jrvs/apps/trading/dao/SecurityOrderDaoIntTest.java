@@ -1,6 +1,9 @@
 package ca.jrvs.apps.trading.dao;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Quote;
@@ -124,7 +127,7 @@ public class SecurityOrderDaoIntTest {
     assertEquals(2, orders.size());
 
     try {
-      orders = securityOrderDao.findAllById(Arrays.asList(1, 2, 3 ,4));
+      orders = securityOrderDao.findAllById(Arrays.asList(1, 2, 3, 4));
       fail();
     } catch (Exception e) {
       assertTrue(true);

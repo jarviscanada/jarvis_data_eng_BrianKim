@@ -65,8 +65,9 @@ public class TraderDao extends JdbcCrudDao<Trader> {
   public <S extends Trader> Iterable<S> saveAll(Iterable<S> entities) {
     List<S> savedEntities = new ArrayList<>();
     entities.forEach(entity -> {
-      if (entity == null)
+      if (entity == null) {
         throw new IllegalArgumentException("Trader entity is null");
+      }
       savedEntities.add(save(entity));
     });
     return savedEntities;

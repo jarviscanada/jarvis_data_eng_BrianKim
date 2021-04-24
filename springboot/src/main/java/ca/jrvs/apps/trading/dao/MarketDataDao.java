@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import javax.swing.text.html.Option;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -42,9 +41,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
   /**
    * Get an IexQuote (helper method which is used in findAllById)
-   * @return an Optional of IexQuote object
+   *
    * @param ticker
-   * @throws IllegalArgumentException if a given ticker is invalid
+   * @return an Optional of IexQuote object
+   * @throws IllegalArgumentException      if a given ticker is invalid
    * @throws DataRetrievalFailureException if HTTP request failed
    */
   @Override
@@ -65,9 +65,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
   /**
    * Get quotes from IEX
+   *
    * @param tickers is a list of tickers
    * @return a list of IexQuote object
-   * @throws IllegalArgumentException if any ticker is invalid or ticker is empty
+   * @throws IllegalArgumentException      if any ticker is invalid or ticker is empty
    * @throws DataRetrievalFailureException if HTTP request failed
    */
   @Override
@@ -75,8 +76,9 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       IllegalArgumentException, DataRetrievalFailureException {
     List<IexQuote> quotes = new ArrayList<>();
     tickers.forEach(ticker -> {
-      if (ticker.equals("") || ticker.matches("(.*)\\d(.*)"))
+      if (ticker.equals("") || ticker.matches("(.*)\\d(.*)")) {
         throw new IllegalArgumentException("Ticker value is invalid");
+      }
 
       String url = String.format(IEX_BATCH_URL, ticker);
       String response = executeHttpGet(url).get();
@@ -95,6 +97,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
   /**
    * Execute a get and return http entity/body as a string
+   *
    * @param url resource URL
    * @return http response body or Optional.empty() for 404 response
    * @throws DataRetrievalFailureException if HTTP failed or status code is unexpected
@@ -105,12 +108,13 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     try {
       HttpResponse response = httpClient.execute(request);
-      if (response.getStatusLine().getStatusCode() == 404)
+      if (response.getStatusLine().getStatusCode() == 404) {
         return Optional.empty();
-      else if (response.getStatusLine().getStatusCode() == 200)
+      } else if (response.getStatusLine().getStatusCode() == 200) {
         return Optional.of(EntityUtils.toString(response.getEntity()));
-      else
+      } else {
         throw new DataRetrievalFailureException("Http Request has Failed");
+      }
     } catch (IOException e) {
       throw new RuntimeException("Failed to execute HTTP request");
     }
@@ -118,6 +122,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
   /**
    * Borrow a HTTP client from the httpClientConnectionManager
+   *
    * @return a httpClient
    */
   private CloseableHttpClient getHttpClient() {

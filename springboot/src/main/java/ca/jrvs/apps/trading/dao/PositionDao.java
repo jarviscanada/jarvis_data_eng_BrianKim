@@ -23,7 +23,8 @@ public class PositionDao {
 
   private JdbcTemplate jdbcTemplate;
 
-  @Autowired public PositionDao(DataSource dataSource) {
+  @Autowired
+  public PositionDao(DataSource dataSource) {
     this.jdbcTemplate = new JdbcTemplate(dataSource);
   }
 
@@ -43,8 +44,9 @@ public class PositionDao {
   public boolean existsById(Integer id) {
     String exists_sql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=?";
     Integer count = jdbcTemplate.queryForObject(exists_sql, Integer.class, id);
-    if (count == null)
+    if (count == null) {
       throw new NullPointerException("SQL NULL occurred.");
+    }
     return count == 1;
   }
 

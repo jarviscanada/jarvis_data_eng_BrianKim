@@ -4,7 +4,6 @@ import ca.jrvs.apps.trading.model.domain.Quote;
 import java.util.List;
 import java.util.Optional;
 import javax.sql.DataSource;
-import javax.swing.text.html.Option;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
   /**
    * hint: http://bit.ly/2sDz8hq DataAccessException family
+   *
    * @throws DataAccessException for unexpected SQL result or SQL Execution failure
    */
   @Override
@@ -64,8 +64,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   private void addOne(Quote quote) {
     SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(quote);
     int row = simpleJdbcInsert.execute(parameterSource);
-    if (row != 1)
+    if (row != 1) {
       throw new IncorrectResultSizeDataAccessException("Failed to insert", 1, row);
+    }
   }
 
   /**
@@ -73,12 +74,13 @@ public class QuoteDao implements CrudRepository<Quote, String> {
    */
   private int updateOne(Quote quote) {
     String update_sql = "UPDATE quote SET last_price=?, bid_price=?, "
-        + "bid_size=?, ask_price=?, ask_size=? WHERE " + ID_COLUMN_NAME+ "=?";
+        + "bid_size=?, ask_price=?, ask_size=? WHERE " + ID_COLUMN_NAME + "=?";
     return jdbcTemplate.update(update_sql, makeUpdateValues(quote));
   }
 
   /**
    * helper method that makes sql update values objects
+   *
    * @param quote to be updated
    * @return UPDATE_SQL values
    */
@@ -89,6 +91,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
   /**
    * return all quotes
+   *
    * @throws DataAccessException if failed to update
    */
   @Override
@@ -101,6 +104,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
   /**
    * Find a quote by ticker
+   *
    * @param ticker name
    * @return quote or Optional.empty if not found
    */
@@ -108,7 +112,8 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   public Optional<Quote> findById(String ticker) {
     String find_sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     try {
-      Quote quote = jdbcTemplate.queryForObject(find_sql, BeanPropertyRowMapper.newInstance(Quote.class), ticker);
+      Quote quote = jdbcTemplate
+          .queryForObject(find_sql, BeanPropertyRowMapper.newInstance(Quote.class), ticker);
       return Optional.of(quote);
     } catch (IncorrectResultSizeDataAccessException e) {
       return Optional.empty();
@@ -119,8 +124,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   public boolean existsById(String ticker) {
     String exists_sql = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + ID_COLUMN_NAME + "=?";
     Integer count = jdbcTemplate.queryForObject(exists_sql, Integer.class, ticker);
-    if (count == null)
+    if (count == null) {
       throw new NullPointerException("SQL NULL occurred");
+    }
     return count == 1;
   }
 
@@ -140,8 +146,9 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   public long count() {
     String count_sql = "SELECT COUNT(*) FROM " + TABLE_NAME;
     Long count = jdbcTemplate.queryForObject(count_sql, Long.class);
-    if (count == null)
+    if (count == null) {
       throw new NullPointerException("SQL NULL occurred");
+    }
     return count;
   }
 

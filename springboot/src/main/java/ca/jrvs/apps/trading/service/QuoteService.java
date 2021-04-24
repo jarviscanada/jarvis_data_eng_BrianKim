@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Transactional
@@ -31,14 +30,12 @@ public class QuoteService {
   }
 
   /**
-   * Update quote table against IEX source
-   *  - get all quotes from the db
-   *  - foreach ticker get iexQuote
-   *  - convert iexQuote to quote entity
-   *  - persist quote to db
-   * @throws ResourceNotFoundException if ticker not found in IEX
+   * Update quote table against IEX source - get all quotes from the db - foreach ticker get
+   * iexQuote - convert iexQuote to quote entity - persist quote to db
+   *
+   * @throws ResourceNotFoundException                   if ticker not found in IEX
    * @throws org.springframework.dao.DataAccessException if unable to retrieve data
-   * @throws IllegalArgumentException for invalid input
+   * @throws IllegalArgumentException                    for invalid input
    */
   public void updateMarketData() {
     List<Quote> quotes = findAllQuotes();
@@ -54,13 +51,13 @@ public class QuoteService {
   }
 
   /**
-   * Helper method. Map a IexQuote to a Quote entity.
-   * Note: `iexQuote.getLastestPrice() == null` if the stock market is closed
-   * Make sure to set a default value for number field(s).
+   * Helper method. Map a IexQuote to a Quote entity. Note: `iexQuote.getLastestPrice() == null` if
+   * the stock market is closed Make sure to set a default value for number field(s).
    */
   protected static Quote buildQuoteFromIexQuote(IexQuote iexQuote) {
-    if (iexQuote.getLatestPrice() == null)
+    if (iexQuote.getLatestPrice() == null) {
       throw new ResourceNotFoundException("The stock market is close.");
+    }
 
     Quote quote = new Quote();
     quote.setTicker(iexQuote.getSymbol());
@@ -74,10 +71,9 @@ public class QuoteService {
 
   /**
    * Validate (against IEX) and save given tickers to quote table.
+   * <p>
+   * - Get iexQuotes(s) - convert each iexQuote to Quote entity - persist the quote to db
    *
-   *  - Get iexQuotes(s)
-   *  - convert each iexQuote to Quote entity
-   *  - persist the quote to db
    * @param tickers a list of tickers/symbols
    * @throws IllegalArgumentException if ticker is not found from IEX
    */
@@ -118,6 +114,7 @@ public class QuoteService {
 
   /**
    * Update a given quote to quote table without validation
+   *
    * @param quote entity
    */
   public Quote saveQuote(Quote quote) {
@@ -126,6 +123,7 @@ public class QuoteService {
 
   /**
    * Find all quotes from the quote table
+   *
    * @return a list of quotes
    */
   public List<Quote> findAllQuotes() {
