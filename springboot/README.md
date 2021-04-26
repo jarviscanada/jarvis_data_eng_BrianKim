@@ -23,11 +23,13 @@ which was hard to maintain and scale, this new system will provide microservice 
 # Implementation
 ## Architecture
 - ![Diagram](asset/trading.png)
-- briefly explain the following components and services (3-5 sentences for each)
-  - Controller layer (e.g. handles user requests....)
-  - Service layer
-  - DAO layer
-  - SpringBoot: webservlet/TomCat and IoC
+- Components/Serivices
+  - Controller layer: In controller layer, user inputs are parsed and appropriate methods are called based on the REST API end point.
+  The endpoints are annotated in the class and method-level in order for the Tomcat WebServlet to redirect and call to.
+  - Service layer: In service layer, the business logics are encapsulated. User input passed as arguments are validated and exceptions are handled if any error occurs.
+  - DAO layer: In dao layer, HttpClient and DataSource(JDBC) objects are managed to connect to Web service or Database. CRUD operations and complex queries are contained. 
+  - SpringBoot: SpringBoot groups all controller/service/dao layers into one maintainable system. As part of Springboot framework, Apache Tomcat/WebServlet listens for HTTP Requests
+  and calls the appropriate controller method based on the end points.
   - PSQL and IEX
 
 ## REST API Usage
