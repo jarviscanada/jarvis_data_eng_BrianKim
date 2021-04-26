@@ -42,8 +42,8 @@ jarvis_projects:
   - name: "Core Java Apps"
     git_url: "/core_java"
     description:
-      - "Twitter App: In progress."
-      - "JDBC App: In progress."
+      - "Twitter App: Designed and developed a Java App that allows users to post/show/delete a Twitter post using Twitter REST API. This app implements the MVC and DAO pattern to access Twitter REST API. A HttpClient will create a POST/GET/DELETE request, signed with the OAuth 1.0 authorization method, and send it to the Twitter server and get the response back in JSON, which is then parsed into a meaningful result for the users. Maven is used to manage project lifecycle and dependencies. The Spring framework is used to manage the dependency injection of the components. It is tested with Mockito, JUnit 4, and finally deployed by dockerizing it into an image and pushing it to the Docker Registry."
+      - "JDBC App: Developed a JDBC App that creates a connection to an PostgreSQL database which stores sales information using the JDBC driver. It utilizes the connection pooling to simplify JDBC flow and Data Access Object (DAO) Pattern to abstract the data persistence and the underlying queries. CustomerDAO and OrdersDAO are implemented to perform CRUD operations against the tables in the database system."
       - "Grep App: Developed a Java Grep App on IntelliJ that implements the Linux grep string pattern searching utility that matches a regular expression. This app recursively searches a given directory using BufferedReader for lines that match the specified regular expression. When the matched lines are found with Pattern Matcher, they are written out to a file by a BufferedWritter. Exceptions and errors are handled by SLF4J framework, packaged with Maven, and containerized with Docker for easy access."
 
   - name: "Springboot App"
