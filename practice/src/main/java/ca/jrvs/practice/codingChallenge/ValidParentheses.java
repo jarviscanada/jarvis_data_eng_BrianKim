@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * ticket: https://www.notion.so/jarvisdev/Valid-Parentheses-32e31f8b82ea4f0bac1602ec45332af4
@@ -12,9 +13,14 @@ public class ValidParentheses {
 
   public static void main(String[] args) {
     ValidParentheses solution = new ValidParentheses();
-    System.out.println(solution.isValid("{[()]({})}"));
+    System.out.println(solution.isValid("[]"));
   }
 
+  /**
+   * Big O: O(n)
+   * Because for loop is used with length of arr.length.
+   * Also Map and Stack operations are O(1)
+   */
   public boolean isValid(String s) {
     Map<Character, Character> pair = new HashMap<>();
     pair.put('}', '{');
@@ -22,21 +28,18 @@ public class ValidParentheses {
     pair.put(')', '(');
     char[] arr = s.toCharArray();
     // {[]} -> }][{ ()[]{} {[]()}
-    LinkedList<Character> stack = new LinkedList<>();
-    for (char c : arr) {
-      stack.add(c);
-    }
-    while (stack.size() > 0) {
-      if (stack.getFirst().equals(pair.get(stack.getLast()))) {
-        stack.removeFirst();
-        stack.removeLast();
-      } else {
-        char k = stack.removeLast();
-        if (!pair.get(k).equals(stack.getLast()))
+    Stack<Character> stack = new Stack<>();
+
+    for (int i = 0; i < arr.length; i++) {
+      if (pair.containsValue(arr[i]))
+        stack.push(arr[i]);
+      else if (pair.containsKey(arr[i])) {
+        if (stack.empty())
           return false;
-        stack.removeLast();
+        else if (stack.peek() == pair.get(arr[i]))
+          stack.pop();
       }
     }
-    return true;
+    return stack.size() == 0;
   }
 }
