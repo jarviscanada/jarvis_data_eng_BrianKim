@@ -1,4 +1,4 @@
-package ca.jrvs.practice.search;
+package ca.jrvs.practice.dataStructure.search;
 
 import java.util.Optional;
 
