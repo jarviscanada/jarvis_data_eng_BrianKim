@@ -1,6 +1,9 @@
 package ca.jrvs.practice.dataStructure.list;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 public class LinkedJList<E> implements JList<E> {
   protected static class Node<E> {
@@ -191,6 +194,30 @@ public class LinkedJList<E> implements JList<E> {
     }
     size--;
     return removed;
+  }
+
+  public void removeDuplicate() {
+    HashSet<Integer> map = new HashSet<>();
+    map.add(-1);
+    Node<E> curr = first;
+    while (curr != null) {
+      if (!map.contains(((Integer) curr.item))) {
+        map.add((Integer) curr.item);
+      } else {
+        if (curr.prev == null)
+          first = curr.next;
+        else
+          curr.prev.next = curr.next;
+
+        if (curr.next == null)
+          last = curr.prev;
+        else
+          curr.next.prev = curr.prev;
+
+        size--;
+      }
+      curr = curr.next;
+    }
   }
 
   /**
