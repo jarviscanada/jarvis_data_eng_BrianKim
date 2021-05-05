@@ -7,9 +7,9 @@ public class LinkedListCycle {
   protected static class ListNode {
     int val;
     ListNode next;
-    ListNode(int x) {
+    ListNode(int x, ListNode next) {
       val = x;
-      next = null;
+      next = next;
     }
   }
 
