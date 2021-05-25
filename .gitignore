@@ -9,3 +9,10 @@ target/
 .idea/
 .eclipse
 .DS_Store
+.cache/
+.config/
+.ipynb_checkpoints/
+.ipython/
+.jupyter/
+.local/
+.npm/
