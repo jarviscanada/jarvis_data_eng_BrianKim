@@ -40,7 +40,7 @@
     },
     {
       "description": "Developed and analyzed big data set from an external market vendor to perform data wrangling and generate new insights about the market. With the transaction data pulled and dumped into a PostgreSQL data warehouse. From the data in the data warehouse, using Python NumPy and Pandas, the data is analyzed on Jupyter Notebook and the results are visualized using Matplotlib.",
-      "git_url": "/python_data_anlytics",
+      "git_url": "/python_data_analytics",
       "name": "Python Data Analytics"
     },
     {
