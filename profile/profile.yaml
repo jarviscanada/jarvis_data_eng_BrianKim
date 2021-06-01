@@ -50,7 +50,7 @@ jarvis_projects:
     git_url: "/springboot"
     description: "Designed and developed a three-tier architecture application that utilizes SpringBoot to provide a stock trading app. This application is a RESTful API and can be consumed by various clients such as Web/Mobile applications. HTTP endpoints are used to help manage trader profiles, accounts, and trade securities. Integration tests were run against each layer and REST APIs were tested via Swagger-UI, Postman, and the application was dockerized and deployed on the Docker hub."
   - name: "Python Data Analytics"
-    git_url: "/python_data_anlytics"
+    git_url: "/python_data_analytics"
     description: "Developed and analyzed big data set from an external market vendor to perform data wrangling and generate new insights about the market. With the transaction data pulled and dumped into a PostgreSQL data warehouse. From the data in the data warehouse, using Python NumPy and Pandas, the data is analyzed on Jupyter Notebook and the results are visualized using Matplotlib."
   - name: "Hadoop"
     git_url: "/hadoop"
